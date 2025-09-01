@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../redux/store";
 import { fetchProductById, deleteProduct } from "../../redux/admin/productThunks/productThunk";
+import { toast } from "react-hot-toast";
 
 const ViewProduct: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -95,8 +96,13 @@ const ViewProduct: React.FC = () => {
             className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
             onClick={async () => {
               if (window.confirm("Are you sure you want to delete this product?")) {
-                await dispatch(deleteProduct(Number(selectedProduct.id)));
-                navigate("/products");
+                const res = await dispatch(deleteProduct(Number(selectedProduct.id)));
+                if (res.meta.requestStatus === "fulfilled") {
+                  toast.success("Product deleted successfully!");
+                  navigate("/products");
+                } else {
+                  toast.error(res.payload || "Failed to delete product");
+                }
               }
             }}
           >

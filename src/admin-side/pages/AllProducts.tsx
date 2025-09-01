@@ -124,11 +124,6 @@ const AllProducts: React.FC = () => {
                   >
                     View
                   </button>
-                  {/* Uncomment if you want Edit/Delete */}
-                  {/* 
-                  <button className="bg-yellow-400 px-4 py-2 rounded-md hover:bg-yellow-500">Edit</button>
-                  <button className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Delete</button>
-                  */}
                 </div>
               </div>
             </div>

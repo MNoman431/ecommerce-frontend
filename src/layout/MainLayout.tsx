@@ -1,11 +1,11 @@
+import { Toaster } from "react-hot-toast"
 import AdminRoutes from "../admin-side/routes/AdminRoutes"
-
 const MainLayout = () => {
   return (
-    <div>
-         <AdminRoutes/>
-    </div>
+        <>
+          <Toaster position="top-right" />
+          <AdminRoutes />
+        </>
   )
 }
-
 export default MainLayout

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import type { AppDispatch, RootState } from "../../redux/store";
-import { addProduct, updateProduct, fetchProductById, deleteProduct } from "../../redux/admin/productThunks/productThunk";
+import { addProduct, updateProduct, fetchProductById} from "../../redux/admin/productThunks/productThunk";
+import { toast } from "react-hot-toast";
 
 const AddProduct: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -47,23 +48,29 @@ const AddProduct: React.FC = () => {
     formData.append("category", category);
     if (image) formData.append("image", image);
 
+    let res;
     if (id) {
       // edit mode
-      await dispatch(updateProduct({ id: Number(id), productData: formData }));
+      res = await dispatch(updateProduct({ id: Number(id), productData: formData }));
+      if (res.meta.requestStatus === "fulfilled") {
+        toast.success("Product updated successfully!");
+      } else {
+        toast.error(res.payload || "Failed to update product");
+      }
     } else {
       // add mode
-      await dispatch(addProduct(formData));
+      res = await dispatch(addProduct(formData));
+      if (res.meta.requestStatus === "fulfilled") {
+        toast.success("Product added successfully!");
+      } else {
+        toast.error(res.payload || "Failed to add product");
+      }
     }
 
-    navigate("/products"); // <-- yahan redirect karo
+    navigate("/products");
   };
 
-  const handleDelete = async () => {
-    if (window.confirm("Are you sure you want to delete this product?")) {
-      await dispatch(deleteProduct(Number(selectedProduct.id)));
-      navigate("/products"); // <-- yahan redirect karo
-    }
-  };
+  
 
   return (
     <div className="flex justify-center items-center p-6 bg-gray-100 min-h-screen">
@@ -162,15 +169,7 @@ const AddProduct: React.FC = () => {
           </button>
         </form>
 
-        {/* Delete Button (only in edit mode) */}
-        {/* {id && (
-          <button
-            onClick={handleDelete}
-            className="w-full bg-red-600 text-white font-semibold px-4 py-3 rounded-lg shadow hover:bg-red-700 transition mt-4"
-          >
-            Delete Product
-          </button>
-        )} */}
+     
       </div>
     </div>
   );
