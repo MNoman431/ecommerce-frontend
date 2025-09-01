@@ -1,9 +1,10 @@
-import AdminRoutes from "./admin-side/routes/AdminRoutes";
+
+import MainLayout from "./layout/MainLayout";
 
 function App() {
   return (
     <>
-      <AdminRoutes />
+      <MainLayout />
     </>
   );
 }

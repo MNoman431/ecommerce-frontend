@@ -8,13 +8,14 @@ const Slider: React.FC = () => {
       <nav className="flex flex-col space-y-4">
 
        
-        <Link to="/admin/dashboard" className="hover:bg-gray-700 p-2 rounded">
+       
+        <Link to="/" className="hover:bg-gray-700 p-2 rounded">
           Dashboard
         </Link>
-        <Link to="/admin/products" className="hover:bg-gray-700 p-2 rounded">
+        <Link to="/products" className="hover:bg-gray-700 p-2 rounded">
           All Products
         </Link>
-        <Link to="/admin/add-product" className="hover:bg-gray-700 p-2 rounded">
+        <Link to="/add-product" className="hover:bg-gray-700 p-2 rounded">
           Add Product
         </Link>
       </nav>
