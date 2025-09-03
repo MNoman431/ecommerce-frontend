@@ -1,65 +1,93 @@
-// import { useState } from "react";
 
-// const RegisterForm = ({ onSubmit }) => {
-//   const [formData, setFormData] = useState({
-//     name: "",
-//     email: "",
-//     password: "",
-//   });
+import React, { useState, FormEvent, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { registerUser } from "../../redux/user/authThunks/AuthThunks";
+import { resetAuthState } from "../../redux/user/authSlice/AuthSlice";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../../redux/store";
 
-//   const handleChange = (e) => {
-//     setFormData({ ...formData, [e.target.name]: e.target.value });
-//   };
+const RegisterForm: React.FC = () => {
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [role, setRole] = useState<string>("user");
 
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     onSubmit(formData); // parent ko data bhej do
-//   };
+  const dispatch = useDispatch<AppDispatch>();
+  const { user, loading, error } = useSelector((state: RootState) => state.auth);
+  const navigate = useNavigate();
 
-//   return (
-//     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-//       <form
-//         onSubmit={handleSubmit}
-//         className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md"
-//       >
-//         <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
+  useEffect(() => {
+    if (user) {
+      toast.success("Registration successful! Please log in.");
+      // Clear any accidental logged-in state from register response
+      localStorage.removeItem("user");
+      localStorage.removeItem("role");
+      dispatch(resetAuthState());
+      navigate("/login");
+    }
+    if (error) toast.error(error);
+  }, [user, error, navigate, dispatch]);
+  
 
-//         <input
-//           type="text"
-//           name="name"
-//           placeholder="Full Name"
-//           value={formData.name}
-//           onChange={handleChange}
-//           className="w-full p-3 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-//         />
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!name || !email || !password || !role) {
+      toast.error("Please fill all fields");
+      return;
+    }
+    dispatch(registerUser({ name, email, password, role }));
+  };
 
-//         <input
-//           type="email"
-//           name="email"
-//           placeholder="Email Address"
-//           value={formData.email}
-//           onChange={handleChange}
-//           className="w-full p-3 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-//         />
+  return (
+    <div className="max-w-md mx-auto mt-20 p-6 border rounded shadow-lg">
+      <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <input
+          type="text"
+          placeholder="Full Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-400"
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-400"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-400"
+        />
+        <select
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+          className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-400"
+        >
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+        <button
+          type="submit"
+          disabled={loading}
+          className="bg-green-500 text-white p-3 rounded hover:bg-green-600 transition disabled:opacity-50"
+        >
+          {loading ? "Registering..." : "Register"}
+        </button>
+      </form>
+      <p className="mt-4 text-center text-gray-600">
+        Already have an account?{" "}
+        <Link to="/login" className="text-blue-500 hover:underline">
+          Login here
+        </Link>
+      </p>
+    </div>
+  );
+};
 
-//         <input
-//           type="password"
-//           name="password"
-//           placeholder="Password"
-//           value={formData.password}
-//           onChange={handleChange}
-//           className="w-full p-3 mb-6 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-//         />
-
-//         <button
-//           type="submit"
-//           className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition"
-//         >
-//           Register
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default RegisterForm;
+export default RegisterForm;

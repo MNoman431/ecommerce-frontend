@@ -28,7 +28,7 @@ export const addProduct = createAsyncThunk(
 // ✅ Update product
 export const updateProduct = createAsyncThunk(
   "admin/updateProduct",
-  async ({ id, productData }: { id: string; productData: FormData }) => {
+  async ({ id, productData }: { id: number; productData: FormData }) => {
     const res = await adminApi.patch(`/products/${id}`, productData, {
       headers: { "Content-Type": "multipart/form-data" },
       withCredentials: true,

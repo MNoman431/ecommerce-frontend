@@ -17,7 +17,10 @@ const AddProduct: React.FC = () => {
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
   const [category, setCategory] = useState("");
-  const [image, setImage] = useState<File | null>(null);
+  const [carModel, setCarModel] = useState("");
+  const [color, setColor] = useState("");
+  const [material, setMaterial] = useState("");
+  const [images, setImages] = useState<File[]>([]);
 
   // jab id aayegi (edit mode), product fetch karke state me set karo
   useEffect(() => {
@@ -34,6 +37,9 @@ const AddProduct: React.FC = () => {
       setPrice(String(selectedProduct.price) || "");
       setStock(String(selectedProduct.stock) || "");
       setCategory(selectedProduct.category || "");
+      setCarModel(selectedProduct.carModel || "");
+      setColor(selectedProduct.color || "");
+      setMaterial(selectedProduct.material || "");
     }
   }, [selectedProduct, id]);
 
@@ -46,7 +52,14 @@ const AddProduct: React.FC = () => {
     formData.append("price", price);
     formData.append("stock", stock);
     formData.append("category", category);
-    if (image) formData.append("image", image);
+    formData.append("carModel", carModel);
+    formData.append("color", color);
+    formData.append("material", material);
+
+    // multiple images
+    images.forEach((file) => {
+      formData.append("images", file);
+    });
 
     let res;
     if (id) {
@@ -55,7 +68,7 @@ const AddProduct: React.FC = () => {
       if (res.meta.requestStatus === "fulfilled") {
         toast.success("Product updated successfully!");
       } else {
-        toast.error(res.payload || "Failed to update product");
+        toast.error((res as any).payload || "Failed to update product");
       }
     } else {
       // add mode
@@ -63,44 +76,45 @@ const AddProduct: React.FC = () => {
       if (res.meta.requestStatus === "fulfilled") {
         toast.success("Product added successfully!");
       } else {
-        toast.error(res.payload || "Failed to add product");
+        toast.error((res as any).payload || "Failed to add product");
       }
     }
 
     navigate("/products");
   };
 
-  
-
   return (
     <div className="flex justify-center items-center p-6 bg-gray-100 min-h-screen">
-      <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-lg">
+      <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-2xl">
         <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
           {id ? "✏️ Edit Product" : "➕ Add New Product"}
         </h1>
 
         <form className="space-y-5" onSubmit={handleSubmit}>
-          {/* Image Preview (edit mode or new image selected) */}
-          {id && selectedProduct?.imageUrl && !image && (
-            <div className="mb-3">
-              <img
-                src={selectedProduct.imageUrl}
-                alt="Current"
-                className="w-full h-40 object-cover rounded-lg border mb-2"
-              />
-              <p className="text-xs text-gray-500">Current Image</p>
+          {/* Image Preview */}
+          {id && selectedProduct?.images && Array.isArray(selectedProduct.images) && selectedProduct.images.length > 0 && (
+            <div className="mb-3 grid grid-cols-3 gap-3">
+              {selectedProduct.images.map((url: string, idx: number) => (
+                <img key={idx} src={url} alt={`Current ${idx}`} className="w-full h-28 object-cover rounded-lg border" />
+              ))}
+              <p className="col-span-3 text-xs text-gray-500">Current Images</p>
             </div>
           )}
-          {image && (
-            <div className="mb-3">
-              <img
-                src={URL.createObjectURL(image)}
-                alt="Preview"
-                className="w-full h-40 object-cover rounded-lg border mb-2"
-              />
-              <p className="text-xs text-gray-500">New Image Preview</p>
+
+          {images.length > 0 && (
+            <div className="mb-3 grid grid-cols-3 gap-3">
+              {images.map((file, idx) => (
+                <img
+                  key={idx}
+                  src={URL.createObjectURL(file)}
+                  alt={`Preview ${idx}`}
+                  className="w-full h-28 object-cover rounded-lg border"
+                />
+              ))}
+              <p className="col-span-3 text-xs text-gray-500">New Images Preview</p>
             </div>
           )}
+
           {/* Product Name */}
           <input
             type="text"
@@ -151,13 +165,39 @@ const AddProduct: React.FC = () => {
             required
           />
 
-          {/* Image */}
+          {/* New fields */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <input
+              type="text"
+              placeholder="Car model"
+              className="w-full border border-gray-300 rounded-lg p-3"
+              value={carModel}
+              onChange={(e) => setCarModel(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Color"
+              className="w-full border border-gray-300 rounded-lg p-3"
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Material"
+              className="w-full border border-gray-300 rounded-lg p-3"
+              value={material}
+              onChange={(e) => setMaterial(e.target.value)}
+            />
+          </div>
+
+          {/* Images */}
           <input
             type="file"
             accept="image/*"
+            multiple
             className="w-full border border-gray-300 rounded-lg p-2"
-            onChange={(e) => setImage(e.target.files?.[0] || null)}
-            {...(!id ? { required: true } : {})} // add ke time required, edit ke time optional
+            onChange={(e) => setImages(Array.from(e.target.files || []))}
+            {...(!id ? { required: true } : {})}
           />
 
           {/* Submit Button */}
@@ -169,7 +209,6 @@ const AddProduct: React.FC = () => {
           </button>
         </form>
 
-     
       </div>
     </div>
   );

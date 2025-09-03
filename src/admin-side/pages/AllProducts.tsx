@@ -14,7 +14,7 @@ interface Product {
   category?: string;
   stock?: number;
   imageUrl?: string;
-  addedBy?: number;
+  addedBy?: number | string;
 }
 
 const AllProducts: React.FC = () => {
@@ -35,8 +35,12 @@ const AllProducts: React.FC = () => {
     return <p className="text-center text-lg font-medium text-gray-600">⏳ Loading products...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
-  // Show only products added by current admin
-  const adminProducts = products.filter((p: Product) => p.addedBy === user?.id);
+  // If API doesn't include 'addedBy', show all products. Otherwise, filter by current admin id.
+  const hasAddedBy = Array.isArray(products) && products.some((p: Product) => p.addedBy !== undefined && p.addedBy !== null);
+  const currentAdminId = user?.id != null ? String(user.id) : "";
+  const visibleProducts = hasAddedBy
+    ? products.filter((p: Product) => String(p.addedBy ?? "") === currentAdminId)
+    : products;
 
   return (
     <div className="p-6">
@@ -55,9 +59,9 @@ const AllProducts: React.FC = () => {
       </div>
 
       {/* Empty State */}
-      {adminProducts.length === 0 ? (
+      {visibleProducts.length === 0 ? (
         <div className="flex flex-col items-center justify-center mt-20 text-gray-500">
-          <p className="text-lg">No products added yet.</p>
+          <p className="text-lg">No products found.</p>
           <button
             onClick={() => navigate("/add-product")}
             className="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow transition"
@@ -68,7 +72,7 @@ const AllProducts: React.FC = () => {
       ) : (
         // Product Grid
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {adminProducts.map((product: Product) => (
+          {visibleProducts.map((product: Product) => (
             <div
               key={product.id}
               className="bg-white rounded-xl shadow-md hover:shadow-xl transition overflow-hidden border border-gray-200 flex flex-col"

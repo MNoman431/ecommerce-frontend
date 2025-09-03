@@ -1,9 +1,13 @@
 
-import MainLayout from "./layout/MainLayout";
+import './App.css';
+import MainLayout from './layout/MainLayout';
 
 function App() {
-  return <MainLayout />;
+  return (
+    <div className="App">
+      <MainLayout/>
+    </div>
+  );
 }
 
-
-export default App;
+export default App; 
