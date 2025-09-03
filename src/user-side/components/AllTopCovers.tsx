@@ -2,6 +2,9 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FiHeart, FiEye, FiShoppingCart, FiStar } from "react-icons/fi";
+// import { useDispatch } from "react-redux";
+import { addToCart, fetchCart } from "../../redux/user/cartThunks";
+import { toast } from "react-hot-toast";
 import type { AppDispatch, RootState } from "../../redux/store";
 import { fetchProducts } from "../../redux/admin/productThunks/productThunk";
 
@@ -132,7 +135,22 @@ const AllTopCovers: React.FC = () => {
                   <button className="p-2 rounded-full bg-white/90 hover:bg-white text-gray-700 hover:text-red-600 shadow-md">
                     <FiHeart className="w-4 h-4" />
                   </button>
-                  <button className="p-2 rounded-full bg-white/90 hover:bg-white text-gray-700 hover:text-red-600 shadow-md">
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (product.id != null) {
+                        dispatch(addToCart({ productId: product.id as number, quantity: 1 }))
+                          .then(() => {
+                            dispatch(fetchCart());
+                            toast.success("Added to cart");
+                          })
+                          .catch(() => {
+                            toast.error("Failed to add to cart");
+                          });
+                      }
+                    }}
+                    className="p-2 rounded-full bg-white/90 hover:bg-white text-gray-700 hover:text-red-600 shadow-md"
+                  >
                     <FiShoppingCart className="w-4 h-4" />
                   </button>
                 </div>

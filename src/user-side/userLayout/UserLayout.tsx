@@ -32,6 +32,8 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navabar";
 import Contact from "../pages/Contact";
 import QuickView from "../pages/QuickView";
+import Cart from "../pages/Cart";
+import Orders from "../pages/Orders";
 
 const UserLayout = () => {
   return (
@@ -50,7 +52,9 @@ const UserLayout = () => {
           {/* Covers route - only products */}
           <Route path="covers" element={<AllTopCovers />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="/product/:id" element={<QuickView />} />
+          <Route path="product/:id" element={<QuickView />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="orders" element={<Orders />} />
         </Routes>
       </main>
       <Footer />

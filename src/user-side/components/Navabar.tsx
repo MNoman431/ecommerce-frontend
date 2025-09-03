@@ -2,6 +2,7 @@ import React, { useState, useEffect} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiSearch, FiUser, FiShoppingBag, FiLogOut, FiMenu, FiX, FiSun, FiMoon } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchCart } from "../../redux/user/cartThunks";
 import { toast } from "react-hot-toast";
 import type { AppDispatch, RootState } from "../../redux/store";
 import { logoutUser } from "../../redux/user/authThunks/AuthThunks";
@@ -20,12 +21,20 @@ const Navbar: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const { user } = useSelector((state: RootState) => state.auth);
+  const cartCount = useSelector((state: RootState) => state.cart.items.length);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Load cart count when navbar mounts
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchCart());
+    }
+  }, [dispatch, user]);
 
   // Apply theme to <html> element and persist
   useEffect(() => {
@@ -127,11 +136,13 @@ const Navbar: React.FC = () => {
             </button>
             
             <div className="relative">
-              <button className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-full transition-all duration-200">
+              <button onClick={() => navigate('/user/cart')} className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-full transition-all duration-200">
                 <FiShoppingBag className="w-5 h-5" />
-                <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold shadow-lg">
-                  3
-                </span>
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs min-w-[1.25rem] h-5 px-1 rounded-full flex items-center justify-center font-bold shadow-lg">
+                    {Math.min(cartCount, 99)}
+                  </span>
+                )}
               </button>
             </div>
 
