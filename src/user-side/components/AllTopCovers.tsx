@@ -85,10 +85,10 @@ const AllTopCovers: React.FC = () => {
   }
 
   if (error) {
-    return (
+  return (
       <div className="max-w-7xl mx-auto px-6 py-12">
         <p className="text-center text-red-600">{String(error)}</p>
-      </div>
+    </div>
     );
   }
 
