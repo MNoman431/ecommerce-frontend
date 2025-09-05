@@ -16,3 +16,11 @@ export const fetchOrdersCount = createAsyncThunk(
     return res.data;
   }
 );
+
+export const updateOrderStatusThunk = createAsyncThunk(
+  "adminOrders/updateStatus",
+  async ({ id, status }: { id: number | string; status: string }) => {
+    const res = await api.patch(`/orders/${id}/status`, { status });
+    return res.data;
+  }
+);

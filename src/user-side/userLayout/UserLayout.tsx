@@ -34,6 +34,8 @@ import Contact from "../pages/Contact";
 import QuickView from "../pages/QuickView";
 import Cart from "../pages/Cart";
 import Orders from "../pages/Orders";
+import Profile from "../pages/Profile";
+import ThankYou from "../pages/ThankYou";
 import Checkout from "../pages/Checkout";
 
 const UserLayout = () => {
@@ -57,6 +59,8 @@ const UserLayout = () => {
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="orders" element={<Orders />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="thank-you" element={<ThankYou />} />
         </Routes>
       </main>
       <Footer />

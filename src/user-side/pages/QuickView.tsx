@@ -234,8 +234,20 @@ const QuickView: React.FC = () => {
                 <FiHeart className={`w-5 h-5 ${isWishlisted ? 'fill-current' : ''}`} />
               </button>
             </div>
-
-            <button className="w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 py-3 px-6 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors">
+{/* gpttttttttttttttttttttttttttttttttttttttt */}
+            <button
+              onClick={() => {
+                if (selectedProduct?.id != null) {
+                  dispatch(addToCart({ productId: selectedProduct.id as number, quantity }))
+                    .then(() => {
+                      dispatch(fetchCart());
+                      navigate('/user/checkout');
+                    })
+                    .catch(() => toast.error('Failed to proceed to checkout'));
+                }
+              }}
+              className="w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 py-3 px-6 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
+            >
               Buy Now
             </button>
           </div>

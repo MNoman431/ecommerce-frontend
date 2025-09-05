@@ -43,11 +43,13 @@ const ProtectedRouting = () => {
 
 
     <Routes>
-    <Route path="/user/*" element={<UserLayout />} />
-    <Route path="/login" element={<Navigate to="/user" replace />} />
-    <Route path="/register" element={<Navigate to="/user" replace />} />
-    <Route path="*" element={<Navigate to="/user" replace />} />
-  </Routes>
+      <Route path="/user/*" element={<UserLayout />} />
+      {/* Friendly redirects for top-level paths */}
+      <Route path="/orders" element={<Navigate to="/user/orders" replace />} />
+      <Route path="/login" element={<Navigate to="/user" replace />} />
+      <Route path="/register" element={<Navigate to="/user" replace />} />
+      <Route path="*" element={<Navigate to="/user" replace />} />
+    </Routes>
   );
 };
 

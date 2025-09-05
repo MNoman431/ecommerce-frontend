@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAllOrders, fetchOrdersCount } from "../orderThunks/OrderThunk";
+import { fetchAllOrders, fetchOrdersCount, updateOrderStatusThunk } from "../orderThunks/OrderThunk";
 
 interface AdminOrdersState {
   orders: any[];
@@ -41,6 +41,20 @@ const adminOrderSlice = createSlice({
       state.totalCount = Number(action.payload?.count ?? 0);
     });
     builder.addCase(fetchOrdersCount.rejected, (state) => {
+      state.loading = false;
+    });
+
+    builder.addCase(updateOrderStatusThunk.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateOrderStatusThunk.fulfilled, (state, action) => {
+      state.loading = false;
+      const updated = action.payload?.order;
+      if (!updated) return;
+      const idx = state.orders.findIndex((o: any) => o.id === updated.id);
+      if (idx >= 0) state.orders[idx] = { ...state.orders[idx], ...updated };
+    });
+    builder.addCase(updateOrderStatusThunk.rejected, (state) => {
       state.loading = false;
     });
   },

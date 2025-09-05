@@ -1,11 +1,12 @@
 import React, { useState, useEffect} from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FiSearch, FiUser, FiShoppingBag, FiLogOut, FiMenu, FiX, FiSun, FiMoon } from "react-icons/fi";
+import { FiSearch, FiUser, FiShoppingBag, FiLogOut, FiMenu, FiX, FiSun, FiMoon, FiPackage } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCart } from "../../redux/user/cartThunks";
 import { toast } from "react-hot-toast";
 import type { AppDispatch, RootState } from "../../redux/store";
 import { logoutUser } from "../../redux/user/authThunks/AuthThunks";
+import { resetOrders } from "../../redux/user/orderSlice";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,7 +52,7 @@ const Navbar: React.FC = () => {
     { name: "Home", path: "/user" },
     { name: "New Arrivals", path: "/newarrivals" },
     { name: "All Top Covers", path: "/user/covers" },
-    { name: "Accessories", path: "/accessories" },
+    // { name: "Accessories", path: "/accessories" },
     { name: "Contact", path: "/user/contact" },
   ];
 
@@ -59,6 +60,7 @@ const Navbar: React.FC = () => {
     try {
       const res = await dispatch(logoutUser());
       if (res.meta.requestStatus === "fulfilled") {
+        dispatch(resetOrders());
         toast.success("Logged out successfully!");
         navigate("/login");
       } else {
@@ -131,10 +133,15 @@ const Navbar: React.FC = () => {
               {theme === 'dark' ? <FiSun className="w-5 h-5" /> : <FiMoon className="w-5 h-5" />}
             </button>
             
-            <button className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-full transition-all duration-200">
+            <button onClick={() => navigate('/user/profile')} className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-full transition-all duration-200" title="Your Profile">
               <FiUser className="w-5 h-5" />
             </button>
             
+            {/* Orders icon */}
+            <button onClick={() => navigate('/user/orders')} className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-full transition-all duration-200" title="Your Orders">
+              <FiPackage className="w-5 h-5" />
+            </button>
+
             <div className="relative">
               <button onClick={() => navigate('/user/cart')} className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-full transition-all duration-200">
                 <FiShoppingBag className="w-5 h-5" />
@@ -199,15 +206,16 @@ const Navbar: React.FC = () => {
                   >
                     {theme === 'dark' ? <FiSun className="w-5 h-5" /> : <FiMoon className="w-5 h-5" />}
                   </button>
-                  <button className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200">
+                  <button onClick={() => { navigate('/user/profile'); setIsOpen(false); }} className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200">
                     <FiUser className="w-5 h-5" />
                   </button>
+                  {/* Orders (mobile) */}
+                  <button onClick={() => { navigate('/user/orders'); setIsOpen(false); }} className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200">
+                    <FiPackage className="w-5 h-5" />
+                  </button>
                   <div className="relative">
-                    <button className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200">
+                    <button onClick={() => { navigate('/user/cart'); setIsOpen(false); }} className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200">
                       <FiShoppingBag className="w-5 h-5" />
-                      <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
-                        3
-                      </span>
                     </button>
                   </div>
                 </div>

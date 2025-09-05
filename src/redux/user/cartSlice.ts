@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { addToCart, updateCartItem, fetchCart } from "./cartThunks";
+import { placeOrderWithShipping } from "./orderThunks";
 
 interface CartState {
   items: any[];
@@ -18,7 +19,14 @@ const initialState: CartState = {
 const cartSlice = createSlice({
   name: "cart",
   initialState,
-  reducers: {},
+  reducers: {
+    resetCart: (state) => {
+      state.items = [];
+      state.cartId = null;
+      state.loading = false;
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCart.pending, (state) => {
@@ -39,10 +47,16 @@ const cartSlice = createSlice({
       })
       .addCase(updateCartItem.fulfilled, (state) => {
         // after update we can refetch for simplicity
+      })
+      // Clear cart immediately when an order is placed successfully
+      .addCase(placeOrderWithShipping.fulfilled, (state) => {
+        state.items = [];
+        state.cartId = null;
       });
   },
 });
 
+export const { resetCart } = cartSlice.actions;
 export default cartSlice.reducer;
 
 

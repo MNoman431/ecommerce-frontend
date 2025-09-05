@@ -22,8 +22,10 @@ export const placeOrderWithShipping = createAsyncThunk(
   "orders/placeOrderWithShipping",
   async (shipping: { name: string; phone: string; address: string; city: string; postalCode: string }) => {
     const res = await api.post("/orders/", { shipping });
-    return res.data;
+    return res.data; // { message, orderId }
   }
 );
+
+// Removed direct order thunk per request
 
 
