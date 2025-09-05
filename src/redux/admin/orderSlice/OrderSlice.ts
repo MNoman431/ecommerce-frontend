@@ -1,16 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAllOrders } from "../orderThunks/OrderThunk";
+import { fetchAllOrders, fetchOrdersCount } from "../orderThunks/OrderThunk";
 
 interface AdminOrdersState {
   orders: any[];
   loading: boolean;
   error: string | null;
+  totalCount: number;
 }
 
 const initialState: AdminOrdersState = {
   orders: [],
   loading: false,
   error: null,
+  totalCount: 0,
 };
 
 const adminOrderSlice = createSlice({
@@ -29,6 +31,17 @@ const adminOrderSlice = createSlice({
     builder.addCase(fetchAllOrders.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message || "Failed to fetch orders";
+    });
+
+    builder.addCase(fetchOrdersCount.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchOrdersCount.fulfilled, (state, action) => {
+      state.loading = false;
+      state.totalCount = Number(action.payload?.count ?? 0);
+    });
+    builder.addCase(fetchOrdersCount.rejected, (state) => {
+      state.loading = false;
     });
   },
 });

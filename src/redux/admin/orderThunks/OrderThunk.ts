@@ -8,3 +8,11 @@ export const fetchAllOrders = createAsyncThunk(
     return res.data;
   }
 );
+
+export const fetchOrdersCount = createAsyncThunk(
+  "adminOrders/fetchCount",
+  async () => {
+    const res = await api.get("/orders/count");
+    return res.data;
+  }
+);
