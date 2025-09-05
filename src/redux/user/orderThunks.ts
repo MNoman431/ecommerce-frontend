@@ -18,3 +18,12 @@ export const fetchOrders = createAsyncThunk(
 );
 
 
+export const placeOrderWithShipping = createAsyncThunk(
+  "orders/placeOrderWithShipping",
+  async (shipping: { name: string; phone: string; address: string; city: string; postalCode: string }) => {
+    const res = await api.post("/orders/", { shipping });
+    return res.data;
+  }
+);
+
+

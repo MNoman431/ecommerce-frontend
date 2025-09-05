@@ -87,7 +87,7 @@ const Cart: React.FC = () => {
             </div>
             <button
               disabled={totals.itemCount === 0}
-              onClick={() => navigate('/user/orders')}
+              onClick={() => navigate('/user/checkout')}
               className={`mt-4 w-full px-4 py-2 rounded-md text-white ${totals.itemCount === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700'}`}
             >
               Proceed to Checkout ({totals.itemCount})

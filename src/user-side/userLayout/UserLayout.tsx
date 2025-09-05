@@ -34,6 +34,7 @@ import Contact from "../pages/Contact";
 import QuickView from "../pages/QuickView";
 import Cart from "../pages/Cart";
 import Orders from "../pages/Orders";
+import Checkout from "../pages/Checkout";
 
 const UserLayout = () => {
   return (
@@ -54,6 +55,7 @@ const UserLayout = () => {
           <Route path="contact" element={<Contact />} />
           <Route path="product/:id" element={<QuickView />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="checkout" element={<Checkout />} />
           <Route path="orders" element={<Orders />} />
         </Routes>
       </main>

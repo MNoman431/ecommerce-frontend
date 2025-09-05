@@ -4,6 +4,7 @@ import Dashboard from "../pages/Dashbaord";
 import AllProducts from "../pages/AllProducts";
 import AddProduct from "../pages/AddProduct";
 import ViewProduct from "../pages/ViewProduct";
+import OrderManage from "../pages/OrderManage";
 
 
 const AdminRoutes = () => {
@@ -15,6 +16,7 @@ const AdminRoutes = () => {
                 <Route path="add-product" element={<AddProduct />} />
                 <Route path="add-product/:id" element={<AddProduct />} />  {/* ✅ edit ke liye */}
                 <Route path="view-product/:id" element={<ViewProduct />} />
+                <Route path="/order-management" element={<OrderManage />} />
             </Route>
         </Routes>
     );

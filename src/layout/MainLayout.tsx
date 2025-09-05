@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom"
 // import LoginForm from "../user-side/auth/LoginForm"
 import RegisterForm from "../user-side/auth/RegisterForm"
 import ProtectedRouting from "./ProtectedRouting"
+import LoginForm from "../user-side/auth/LoginForm"
 // import LoginForm from "../user-side/auth/LoginForm"
 
 const MainLayout = () => {
@@ -13,7 +14,7 @@ const MainLayout = () => {
 
 {/* publics routes */}
           <Routes>
-            {/* <Route path="/login" element={<LoginForm />} /> */}
+            <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
           </Routes>
 

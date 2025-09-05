@@ -1,22 +1,21 @@
 
 // src/redux/store.ts
-import { configureStore } from "@reduxjs/toolkit";
-import productReducer from "./admin/productSlices/productSlice";
-import authReducer from "./user/authSlice/AuthSlice";
-import cartReducer from "./user/cartSlice";
-import orderReducer from "./user/orderSlice";
+import { configureStore } from '@reduxjs/toolkit'
+import authReducer from './user/authSlice/AuthSlice'
+import cartReducer from './user/cartSlice'
+import ordersReducer from './user/orderSlice'
+import adminOrdersReducer from './admin/orderSlice/OrderSlice'
+import productsReducer from './admin/productSlices/productSlice'
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
-    products: productReducer, // ✅ reducer key updated to "products"
-     auth: authReducer,
-     cart: cartReducer,
-     orders: orderReducer,
+    auth: authReducer,
+    cart: cartReducer,
+    orders: ordersReducer,
+    adminOrders: adminOrdersReducer,
+    products: productsReducer,
   },
-});
+})
 
-// ✅ TypeScript types
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-
-export default store;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

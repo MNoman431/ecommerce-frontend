@@ -85,7 +85,7 @@
 
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Package, PlusCircle, LogOut } from "lucide-react";
+import { LayoutDashboard, Package, PlusCircle, LogOut, ClipboardList } from "lucide-react";
 import { useDispatch } from "react-redux";
 // import { AppDispatch } from "../../redux/store";
 // import { logoutUser } from "../../redux/auth/authThunk"; // <-- yahan import karo
@@ -102,6 +102,8 @@ const Slider: React.FC = () => {
     { path: "/", label: "Dashboard", icon: <LayoutDashboard size={20} /> },
     { path: "/products", label: "All Products", icon: <Package size={20} /> },
     { path: "/add-product", label: "Add Product", icon: <PlusCircle size={20} /> },
+    { path: "/order-management", label: "Order Management", icon: <ClipboardList size={20} /> },
+
   ];
 
   const handleLogout = async () => {
