@@ -1,30 +1,4 @@
 
-// import AllTopCovers from "../components/AllTopCovers";
-// import Carousal from "../components/Carousal";
-// import Navabar from "../components/Navabar";
-// import Footer from "../components/Footer";
-// import { Route, Routes } from "react-router-dom";
-
-
-
-// const UserLayout = () => {
-//   return (
-//     <div className="flex flex-col min-h-screen">
-//       <Navabar />
-//       <Carousal />
-//       <AllTopCovers/>
-//       <Routes>
-//         <Route path="/covers" element={<AllTopCovers />} />
-//       </Routes>
-//       <Footer />
-//     </div>
-//   );
-// };
-
-// export default UserLayout;
-
-
-// UserLayout.tsx
 import { Routes, Route } from "react-router-dom";
 import Carousal from "../components/Carousal";
 import AllTopCovers from "../components/AllTopCovers";

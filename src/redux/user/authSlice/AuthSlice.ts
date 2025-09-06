@@ -38,8 +38,8 @@ const authSlice = createSlice({
     });
     builder.addCase(registerUser.fulfilled, (state, action) => {
       state.loading = false;
-      const payload: any = action.payload as any;
-      state.user = payload?.user ?? payload;
+      // Don't set user in state - let them login separately
+      state.user = null;
     });
     builder.addCase(registerUser.rejected, (state, action) => {
       state.loading = false;

@@ -3,9 +3,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../redux/store";
 import { fetchProductById } from "../../redux/admin/productThunks/productThunk";
-import { addToCart, fetchCart } from "../../redux/user/cartThunks";
 import { toast } from "react-hot-toast";
 import { FiHeart, FiShoppingCart, FiStar, FiTruck, FiShield, FiRotateCcw } from "react-icons/fi";
+import { addToCart, fetchCart } from "../../redux/user/cartThunks/cartThunks";
 
 const QuickView: React.FC = () => {
   const { id } = useParams<{ id: string }>();

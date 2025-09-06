@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import api from "../admin/ApiInstance";
+import api from "../../admin/ApiInstance";
 
 export const addToCart = createAsyncThunk(
   "cart/addToCart",

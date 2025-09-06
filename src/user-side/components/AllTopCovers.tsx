@@ -2,11 +2,10 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FiHeart, FiEye, FiShoppingCart, FiStar } from "react-icons/fi";
-// import { useDispatch } from "react-redux";
-import { addToCart, fetchCart } from "../../redux/user/cartThunks";
 import { toast } from "react-hot-toast";
 import type { AppDispatch, RootState } from "../../redux/store";
 import { fetchProducts } from "../../redux/admin/productThunks/productThunk";
+import { addToCart, fetchCart } from "../../redux/user/cartThunks/cartThunks";
 
 type Product = {
   id?: string | number;

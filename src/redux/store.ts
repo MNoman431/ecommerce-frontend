@@ -2,8 +2,8 @@
 // src/redux/store.ts
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from './user/authSlice/AuthSlice'
-import cartReducer from './user/cartSlice'
-import ordersReducer from './user/orderSlice'
+import cartReducer from './user/cartSlice/cartSlice'
+import ordersReducer from './user/orderSlice/orderSlice'
 import adminOrdersReducer from './admin/orderSlice/OrderSlice'
 import productsReducer from './admin/productSlices/productSlice'
 

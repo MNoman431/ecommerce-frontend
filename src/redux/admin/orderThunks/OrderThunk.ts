@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import api from "../../admin/ApiInstance";
+import api from "../ApiInstance";
 
 export const fetchAllOrders = createAsyncThunk(
   "adminOrders/fetchAll",

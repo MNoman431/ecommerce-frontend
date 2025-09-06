@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../redux/store";
-import { fetchCart } from "../../redux/user/cartThunks";
-import { placeOrderWithShipping } from "../../redux/user/orderThunks";
+import { fetchCart } from "../../redux/user/cartThunks/cartThunks";
+import { placeOrderWithShipping } from "../../redux/user/orderThunks/orderThunks";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 

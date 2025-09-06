@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addToCart, updateCartItem, fetchCart } from "./cartThunks";
-import { placeOrderWithShipping } from "./orderThunks";
+import { addToCart, updateCartItem, fetchCart } from "../cartThunks/cartThunks";
+import { placeOrderWithShipping } from "../orderThunks/orderThunks";
 
 interface CartState {
   items: any[];

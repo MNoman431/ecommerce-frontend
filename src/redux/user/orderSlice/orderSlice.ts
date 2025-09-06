@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchOrders, placeOrder } from "./orderThunks";
+import { fetchOrders, placeOrder } from "../orderThunks/orderThunks";
 
 interface OrdersState {
   orders: any[];

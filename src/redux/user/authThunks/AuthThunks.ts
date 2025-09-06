@@ -62,7 +62,10 @@ export const registerUser = createAsyncThunk(
   ) => {
     try {
       const response = await axiosInstance.post("/user/register", userData);
-      return response.data.data; // returns user data
+      const user = response.data.data; // returns user data with role
+      
+      // Don't store user data - let them login separately
+      return user;
     } catch (err: any) {
       return rejectWithValue(err.response?.data?.message || "Registration failed");
     }

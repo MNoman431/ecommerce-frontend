@@ -1,10 +1,11 @@
 import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../redux/store";
-import { fetchCart, updateCartItem } from "../../redux/user/cartThunks";
+// import { fetchCart, updateCartItem } from "../../redux/user/cartThunks";
 import { FiTrash2 } from "react-icons/fi";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { fetchCart, updateCartItem } from "../../redux/user/cartThunks/cartThunks";
 
 const Cart: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

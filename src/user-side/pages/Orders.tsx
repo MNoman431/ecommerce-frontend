@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../redux/store";
-import { fetchOrders } from "../../redux/user/orderThunks";
+import { fetchOrders } from "../../redux/user/orderThunks/orderThunks";
 
 const Orders: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

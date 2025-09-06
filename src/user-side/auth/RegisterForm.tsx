@@ -19,11 +19,12 @@ const RegisterForm: React.FC = () => {
 
   useEffect(() => {
     if (user) {
-      toast.success("Registration successful! Please log in.");
-      // Clear any accidental logged-in state from register response
+      toast.success("Registration successful! Please login to continue.");
+      // Clear user state and localStorage, then redirect to login
+      dispatch(resetAuthState());
       localStorage.removeItem("user");
       localStorage.removeItem("role");
-      dispatch(resetAuthState());
+      localStorage.removeItem("token");
       navigate("/login");
     }
     if (error) toast.error(error);
