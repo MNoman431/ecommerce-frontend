@@ -3,13 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../redux/store";
 import { fetchCart } from "../../redux/user/cartThunks/cartThunks";
 import { placeOrderWithShipping } from "../../redux/user/orderThunks/orderThunks";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 const Checkout: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { items, loading } = useSelector((s: RootState) => s.cart);
-  const location = useLocation();
   const navigate = useNavigate();
   const directItem = undefined as any; // Direct buy disabled
 

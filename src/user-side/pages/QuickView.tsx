@@ -116,7 +116,7 @@ const QuickView: React.FC = () => {
           {/* Thumbnail Images */}
           {images.length > 1 && (
             <div className="flex space-x-2 overflow-x-auto pb-2">
-              {images.map((img, index) => (
+              {images.map((img: string, index: number) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
