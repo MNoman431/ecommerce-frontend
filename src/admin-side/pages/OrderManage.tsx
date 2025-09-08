@@ -27,52 +27,58 @@ const OrderManage: React.FC = () => {
   }, [totalPages, page]);
 
   const printSlip = (o: any) => {
-    if (!o) return;
-    const userName = o.User?.name || o.user?.name || o.userId || "-";
-    const addressLines = [o.shippingName, o.shippingPhone, o.shippingAddress, `${o.shippingCity || ''} ${o.shippingPostalCode || ''}`]
-      .filter(Boolean)
-      .join('<br/>');
-    const totalItems = (o.OrderItems || []).reduce((sum: number, it: any) => sum + (Number(it.quantity) || 0), 0);
+  if (!o) return;
+  const userName = o.User?.name || o.user?.name || o.userId || "-";
+  const addressLines = [
+    o.fullName,
+    o.phoneNumber,
+    o.address,
+    `${o.city || ''} ${o.postalCode || ''}`,
+    o.country
+  ].filter(Boolean).join('<br/>');
+  const totalItems = (o.OrderItems || []).reduce((sum: number, it: any) => sum + (Number(it.quantity) || 0), 0);
+  const paymentMethod = o.paymentMethod || 'N/A';
 
-    const win = window.open('', 'PRINT', 'height=650,width=900,top=100,left=150');
-    if (!win) return;
-    win.document.write(`
-      <html>
-        <head>
-          <title>Order Slip #${o.id}</title>
-          <style>
-            body { font-family: Arial, sans-serif; color: #111; margin: 24px; }
-            .slip { border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; width: 480px; }
-            .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-            .brand { font-weight: 800; font-size: 18px; }
-            .muted { color: #6b7280; font-size: 12px; }
-            .row { display: flex; justify-content: space-between; margin: 6px 0; font-size: 14px; }
-            .label { color: #374151; }
-            .value { font-weight: 600; }
-            .line { border-top: 1px dashed #e5e7eb; margin: 10px 0; }
-          </style>
-        </head>
-        <body onload="window.print();window.close()">
-          <div class="slip">
-            <div class="header">
-              <div class="brand">Order Slip</div>
-              <div class="muted">#${o.id}</div>
-            </div>
-            <div class="row"><span class="label">Order Date</span><span class="value">${o.createdAt ? new Date(o.createdAt).toLocaleString() : '-'}</span></div>
-            <div class="row"><span class="label">Status</span><span class="value">${o.status}</span></div>
-            <div class="row"><span class="label">Customer</span><span class="value">${userName}</span></div>
-            <div class="line"></div>
-            <div class="row"><span class="label">Ship To</span><span class="value" style="text-align:right">${addressLines || '-'}</span></div>
-            <div class="line"></div>
-            <div class="row"><span class="label">Total Items</span><span class="value">${totalItems}</span></div>
-            <div class="row"><span class="label">Total Amount</span><span class="value">₹${o.totalAmount}</span></div>
+  const win = window.open('', 'PRINT', 'height=650,width=900,top=100,left=150');
+  if (!win) return;
+  win.document.write(`
+    <html>
+      <head>
+        <title>Order Slip #${o.id}</title>
+        <style>
+          body { font-family: Arial, sans-serif; color: #111; margin: 24px; }
+          .slip { border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; width: 480px; }
+          .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+          .brand { font-weight: 800; font-size: 18px; }
+          .muted { color: #6b7280; font-size: 12px; }
+          .row { display: flex; justify-content: space-between; margin: 6px 0; font-size: 14px; }
+          .label { color: #374151; }
+          .value { font-weight: 600; }
+          .line { border-top: 1px dashed #e5e7eb; margin: 10px 0; }
+        </style>
+      </head>
+      <body onload="window.print();window.close()">
+        <div class="slip">
+          <div class="header">
+            <div class="brand">Order Slip</div>
+            <div class="muted">#${o.id}</div>
           </div>
-        </body>
-      </html>
-    `);
-    win.document.close();
-    win.focus();
-  };
+          <div class="row"><span class="label">Order Date</span><span class="value">${o.createdAt ? new Date(o.createdAt).toLocaleString() : '-'}</span></div>
+          <div class="row"><span class="label">Status</span><span class="value">${o.status}</span></div>
+          <div class="row"><span class="label">Customer</span><span class="value">${userName}</span></div>
+          <div class="line"></div>
+          <div class="row"><span class="label">Ship To</span><span class="value" style="text-align:right">${addressLines || '-'}</span></div>
+          <div class="row"><span class="label">Payment</span><span class="value">${paymentMethod}</span></div>
+          <div class="line"></div>
+          <div class="row"><span class="label">Total Items</span><span class="value">${totalItems}</span></div>
+          <div class="row"><span class="label">Total Amount</span><span class="value">₹${o.totalAmount}</span></div>
+        </div>
+      </body>
+    </html>
+  `);
+  win.document.close();
+  win.focus();
+};
 
   return (
     <div className="p-6">
@@ -224,19 +230,25 @@ const OrderManage: React.FC = () => {
               </div>
             </div>
             {/* Shipping info */}
-            {selected.shippingAddress || selected.shippingName ? (
-              <div className="mt-4">
-                <h4 className="text-sm font-semibold text-gray-700">Shipping</h4>
-                <div className="mt-2 text-sm text-gray-700">
-                  <p>{selected.shippingName}</p>
-                  <p>{selected.shippingPhone}</p>
-                  <p>{selected.shippingAddress}</p>
-                  <p>{selected.shippingCity} {selected.shippingPostalCode}</p>
-                </div>
-              </div>
-            ) : (
-              <div className="mt-4 text-sm text-gray-500">No shipping details available.</div>
-            )}
+  {/* Shipping info */}
+{selected.fullName || selected.address ? (
+  <div className="mt-4">
+    <h4 className="text-sm font-semibold text-gray-700">Shipping</h4>
+    <div className="mt-2 text-sm text-gray-700">
+      <p>{selected.fullName || "N/A"}</p>
+      <p>{selected.phoneNumber || "N/A"}</p>
+      <p>{selected.address || "N/A"}</p>
+      <p>{(selected.city || "") + " " + (selected.postalCode || "")}</p>
+      <p>{selected.country || "N/A"}</p>
+    </div>
+    <div className="mt-2 text-sm text-gray-700">
+      <p><strong>Payment Method:</strong> {selected.paymentMethod || "N/A"}</p>
+    </div>
+  </div>
+) : (
+  <div className="mt-4 text-sm text-gray-500">No shipping details available.</div>
+)}
+
 
             <div className="mt-6 flex items-center justify-end gap-3">
               <button onClick={() => printSlip(selected)} className="rounded-md border px-4 py-2 text-sm hover:bg-gray-50">Download Slip / Print</button>
@@ -250,6 +262,11 @@ const OrderManage: React.FC = () => {
 };
 
 export default OrderManage;
+
+
+
+
+
 
 
 
