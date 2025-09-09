@@ -11,6 +11,9 @@ import Orders from "../pages/Orders";
 import Profile from "../pages/Profile";
 import ThankYou from "../pages/ThankYou";
 import Checkout from "../pages/Checkout";
+import PaymentSuccess from "../pages/payment/PaymentSuccess";
+import PaymentFailed from "../pages/payment/PaymentFailed";
+import AboutUs from "../pages/AboutUs";
 
 const UserLayout = () => {
   return (
@@ -29,12 +32,15 @@ const UserLayout = () => {
           {/* Covers route - only products */}
           <Route path="covers" element={<AllTopCovers />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="aboutUs" element={<AboutUs />} />
           <Route path="product/:id" element={<QuickView />} />
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="orders" element={<Orders />} />
           <Route path="profile" element={<Profile />} />
           <Route path="thank-you" element={<ThankYou />} />
+          <Route path="payment/success" element={<PaymentSuccess />} />
+          <Route path="payment/failed" element={<PaymentFailed />} />
         </Routes>
       </main>
       <Footer />

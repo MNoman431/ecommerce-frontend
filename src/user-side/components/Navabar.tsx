@@ -52,9 +52,9 @@ const Navbar: React.FC = () => {
 
   const categories = [
     { name: "Home", path: "/user" },
-    { name: "New Arrivals", path: "/newarrivals" },
+    // { name: "New Arrivals", path: "/newarrivals" },
     { name: "All Top Covers", path: "/user/covers" },
-    // { name: "Accessories", path: "/accessories" },
+    { name: "About Us", path: "/user/aboutUs" },
     { name: "Contact", path: "/user/contact" },
   ];
 
