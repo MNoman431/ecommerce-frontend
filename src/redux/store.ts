@@ -7,6 +7,7 @@ import ordersReducer from './user/orderSlice/orderSlice'
 import adminOrdersReducer from './admin/orderSlice/OrderSlice'
 import productsReducer from './admin/productSlices/productSlice'
 import paymentReducer from './user/paymentSlice/PaymentSlice'
+import searchReducer from './user/searchSlice/SearchSlice'
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +16,8 @@ export const store = configureStore({
     orders: ordersReducer,
     adminOrders: adminOrdersReducer,
     products: productsReducer,
-     payment: paymentReducer,
+    payment: paymentReducer,
+    search: searchReducer,
   },
 })
 

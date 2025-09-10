@@ -14,6 +14,8 @@ import Checkout from "../pages/Checkout";
 import PaymentSuccess from "../pages/payment/PaymentSuccess";
 import PaymentFailed from "../pages/payment/PaymentFailed";
 import AboutUs from "../pages/AboutUs";
+import ProductPage from "../pages/ProductPage";
+
 
 const UserLayout = () => {
   return (
@@ -33,6 +35,9 @@ const UserLayout = () => {
           <Route path="covers" element={<AllTopCovers />} />
           <Route path="contact" element={<Contact />} />
           <Route path="aboutUs" element={<AboutUs />} />
+        <Route path="/user/product/:id" element={<ProductPage />} />
+
+
           <Route path="product/:id" element={<QuickView />} />
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />

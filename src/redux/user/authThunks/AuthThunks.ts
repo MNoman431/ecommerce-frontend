@@ -1,55 +1,4 @@
 
-
-// import { createAsyncThunk } from "@reduxjs/toolkit";
-// import axiosInstance from "../../axiosInstance";
-
-// export const registerUser = createAsyncThunk(
-//   "auth/registerUser",
-//   async (userData, { rejectWithValue }) => {
-//     try {
-//       const res = await axiosInstance.post("/user/register", userData);
-//       return res.data.data;
-//     } catch (err) {
-//       return rejectWithValue(err.response?.data?.message || "Registration failed");
-//     }
-//   }
-// );
-
-// export const loginUser = createAsyncThunk(
-//   "auth/loginUser",
-//   async (userData, { rejectWithValue }) => {
-//     try {
-//       const res = await axiosInstance.post("/user/login", userData);
-//       const user = res.data.data;
-//       localStorage.setItem("role", user.role);
-//       localStorage.setItem("user", JSON.stringify(user));
-//       return user;
-//     } catch (err) {
-//       return rejectWithValue(err.response?.data?.message || "Login failed");
-//     }
-//   }
-// );
-
-// export const logoutUser = createAsyncThunk(
-//   "auth/logoutUser",
-//   async (_, { rejectWithValue }) => {
-//     try {
-//       await axiosInstance.post("/user/logout", {});
-//       localStorage.removeItem("role");
-//       localStorage.removeItem("user");
-//       return null;
-//     } catch (err) {
-//       return rejectWithValue("Logout failed");
-//     }
-//   }
-// );
-
-
-
-
-
-
-
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../admin/ApiInstance";
 
@@ -119,6 +68,50 @@ export const logoutUser = createAsyncThunk(
       return response.data.message;
     } catch (err: any) {
       return rejectWithValue(err.response?.data?.message || "Logout failed");
+    }
+  }
+);
+
+
+
+
+
+
+// ✅ Step 1: Forget Password
+export const forgetPassword = createAsyncThunk(
+  "auth/forgetPassword",
+  async (email: string, { rejectWithValue }) => {
+    try {
+      const res = await axiosInstance.post("/user/forget-password", { email });
+      return res.data.message; // "OTP sent to email"
+    } catch (err: any) {
+      return rejectWithValue(err.response?.data?.message || "Failed to send OTP");
+    }
+  }
+);
+
+// ✅ Step 2: Verify OTP
+export const verifyOtp = createAsyncThunk(
+  "auth/verifyOtp",
+  async (payload: { email: string; otp: string }, { rejectWithValue }) => {
+    try {
+      const res = await axiosInstance.post("/user/verify-otp", payload);
+      return res.data.message; // "OTP verified successfully"
+    } catch (err: any) {
+      return rejectWithValue(err.response?.data?.message || "Invalid OTP");
+    }
+  }
+);
+
+// ✅ Step 3: Reset Password
+export const resetPassword = createAsyncThunk(
+  "auth/resetPassword",
+  async (payload: { email: string; newPassword: string }, { rejectWithValue }) => {
+    try {
+      const res = await axiosInstance.post("/user/reset-password", payload);
+      return res.data.message; // "Password reset successful"
+    } catch (err: any) {
+      return rejectWithValue(err.response?.data?.message || "Reset failed");
     }
   }
 );
