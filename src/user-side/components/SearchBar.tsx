@@ -160,7 +160,8 @@ const SearchBar: React.FC = () => {
 
 // Debounce utility
 function debounce<T extends (...args: any[]) => any>(func: T, wait: number): T & { cancel?: () => void } {
-  let timeout: NodeJS.Timeout;
+  // let timeout: NodeJS.Timeout;
+  let timeout: number;
   const debounced = ((...args: Parameters<T>) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => func(...args), wait);

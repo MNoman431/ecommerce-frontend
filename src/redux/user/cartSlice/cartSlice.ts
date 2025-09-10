@@ -42,10 +42,10 @@ const cartSlice = createSlice({
         state.loading = false;
         state.error = (action.error.message as string) || "Failed to load cart";
       })
-      .addCase(addToCart.fulfilled, (state) => {
+      .addCase(addToCart.fulfilled, (_state) => {
         // after add we can refetch, or just mark success
       })
-      .addCase(updateCartItem.fulfilled, (state) => {
+      .addCase(updateCartItem.fulfilled, (_state) => {
         // after update we can refetch for simplicity
       })
       // Clear cart immediately when an order is placed successfully

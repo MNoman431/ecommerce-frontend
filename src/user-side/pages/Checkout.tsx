@@ -62,15 +62,33 @@ const proceedToPay = async () => {
   const amountInPaise = totals.subtotal * 100;
 
   try {
-    if (paymentMethod === "Card") {
-      setPayLoading(true);
+    setPayLoading(true);
 
+    const shippingInfo = {
+      fullName,
+      email,             // ✅ email included correctly
+      phone: phoneNumber, 
+      deliveryAddress: address,
+      city,
+      postalCode,
+      country,
+      paymentMethod,
+      items: items.map((it: any) => ({
+        productId: it.productId || it.Product?.id,
+        name: it.Product?.name || "",
+        quantity: it.quantity,
+        price: it.Product?.price ?? it.price,
+      })),
+    };
+
+    if (paymentMethod === "Card") {
       // 1️⃣ Create Stripe Payment Intent
       const resultAction = await dispatch(
         createPaymentIntent({
           amount: amountInPaise,
           currency: "pkr",
           productName: "Order Payment",
+          shippingInfo,
         })
       );
 
@@ -86,45 +104,24 @@ const proceedToPay = async () => {
       }
 
       // 2️⃣ Place order BEFORE redirecting to Stripe
-      await dispatch(
-        placeOrderWithShipping({
-          fullName,
-          email,
-          phoneNumber,
-          address,
-          city,
-          postalCode,
-          country,
-          paymentMethod,
-        })
-      ).unwrap();
+      await dispatch(placeOrderWithShipping(shippingInfo)).unwrap();
 
       // 3️⃣ Redirect to Stripe Checkout
       window.location.href = url;
     } else {
       // COD / Bank Transfer
-      await dispatch(
-        placeOrderWithShipping({
-          fullName,
-          email,
-          phoneNumber,
-          address,
-          city,
-          postalCode,
-          country,
-          paymentMethod,
-        })
-      ).unwrap();
-
+      await dispatch(placeOrderWithShipping(shippingInfo)).unwrap();
       toast.success("Order placed successfully");
       navigate("/user/thank-you", { replace: true, state: { name: fullName } });
     }
+
   } catch (e: any) {
     toast.error(e?.message || "Failed to place order");
   } finally {
     setPayLoading(false);
   }
 };
+
 
 // Checkout.tsx
 
