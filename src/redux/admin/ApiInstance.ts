@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:9999/api", // apna backend ka base URL
+  baseURL: "https://ecommerce-backend-z158.onrender.com", // apna backend ka base URL
   withCredentials: true, // agar cookies/jwt bhejna hai
 });
 
