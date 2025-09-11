@@ -51,7 +51,7 @@ const Cart: React.FC = () => {
                 <div key={`${it.cartId}-${it.productId}`} className="flex items-center justify-between border rounded-lg p-3 bg-white dark:bg-gray-800">
                   <div className="min-w-0">
                     <p className="font-semibold truncate">{it.Product?.name || it.Product?.title || `Product ${it.productId}`}</p>
-                    <p className="text-xs text-gray-500">Price: ₹{price} · Qty: {it.quantity} · Total: ₹{lineTotal}</p>
+                    <p className="text-xs text-gray-500">Price: Rs{price} · Qty: {it.quantity} · Total: Rs{lineTotal}</p>
                   </div>
                   <div className="flex items-center gap-2">
                     <button onClick={() => changeQty(it.productId, it.quantity + 1)} className="px-3 py-1 rounded bg-gray-100">+</button>
@@ -78,14 +78,14 @@ const Cart: React.FC = () => {
               <span>{totals.itemCount}</span>
             </div>
             <div className="flex items-center justify-between text-sm py-1">
-              <span>Subtotal</span>
-              <span>₹{totals.subtotal}</span>
-            </div>
+  <span>Subtotal</span>
+  <span>Rs {totals.subtotal}</span>
+</div>
             <div className="border-t my-3" />
-            <div className="flex items-center justify-between font-semibold py-1">
-              <span>Total</span>
-              <span>₹{totals.subtotal}</span>
-            </div>
+           <div className="flex items-center justify-between font-semibold py-1">
+  <span>Total</span>
+  <span>Rs {totals.subtotal}</span>
+</div>
             <button
               disabled={totals.itemCount === 0}
               onClick={() => navigate('/user/checkout')}

@@ -301,7 +301,7 @@ const proceedToPay = async () => {
               <span>× {directItem.quantity}</span>
               {directItem.price != null && (
                 <span>
-                  ₹{Number(directItem.price) *
+                  Rs{Number(directItem.price) *
                     Number(directItem.quantity || 1)}
                 </span>
               )}
@@ -319,7 +319,7 @@ const proceedToPay = async () => {
                     {it.Product?.name || `Product ${it.productId}`}
                   </span>
                   <span>× {qty}</span>
-                  <span>₹{price * qty}</span>
+                  <span>Rs{price * qty}</span>
                 </div>
               );
             })
@@ -328,7 +328,7 @@ const proceedToPay = async () => {
         <div className="border-t my-3" />
         <div className="flex items-center justify-between font-semibold py-1">
           <span>Total</span>
-          <span>₹{totals.subtotal}</span>
+          <span>Rs{totals.subtotal}</span>
         </div>
         <button
           onClick={proceedToPay}

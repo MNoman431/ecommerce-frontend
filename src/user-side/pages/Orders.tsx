@@ -158,7 +158,7 @@ const Orders: React.FC = () => {
 
               {/* Total */}
               <div className="mt-2 text-sm text-gray-700">
-                <span className="font-medium">Total:</span> ₹{o.totalAmount}
+                <span className="font-medium">Total:</span> Rs{o.totalAmount}
               </div>
 
               {/* Personal Info */}
