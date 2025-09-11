@@ -57,10 +57,13 @@ const ViewProduct: React.FC = () => {
 
         {/* Extra details */}
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-          <div className="flex flex-col">
-            <span className="font-semibold text-gray-700">Price:</span>
-            <span className="text-lg font-bold text-gray-900">${selectedProduct.price}</span>
-          </div>
+         <div className="flex flex-col">
+  <span className="font-semibold text-gray-700">Price:</span>
+  <span className="text-lg font-bold text-gray-900">
+    Rs {Number(selectedProduct.price).toLocaleString("en-IN")}
+  </span>
+</div>
+
 
           {selectedProduct.category && (
             <div className="flex flex-col">

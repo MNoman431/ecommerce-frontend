@@ -118,7 +118,13 @@ const AllProducts: React.FC = () => {
                 </div>
 
                 {/* Price */}
-                <p className="text-lg font-bold text-gray-900 mt-3">${product.price}</p>
+                {/* <p className="text-lg font-bold text-gray-900 mt-3">${product.price}</p> */}
+                {/* <p className="text-lg font-bold text-gray-900 mt-3">₹{product.price}</p> */}
+                <p className="text-lg font-bold text-gray-900 mt-3">
+  Rs {Number(product.price).toLocaleString("en-IN")}
+</p>
+
+
 
                 {/* Actions */}
                 <div className="mt-5 flex justify-between gap-3">
