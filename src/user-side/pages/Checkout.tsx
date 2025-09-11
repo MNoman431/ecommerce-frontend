@@ -67,8 +67,8 @@ const proceedToPay = async () => {
     const shippingInfo = {
       fullName,
       email,             // ✅ email included correctly
-      phone: phoneNumber, 
-      deliveryAddress: address,
+     phoneNumber,   // ✅ correct key
+  address,       // ✅ correct key
       city,
       postalCode,
       country,
