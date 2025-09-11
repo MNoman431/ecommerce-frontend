@@ -121,7 +121,7 @@ const SearchBar: React.FC = () => {
                             />
                             <div className="flex-1">
                               <h4 className="font-medium text-gray-900">{product.name}</h4>
-                              <p className="text-red-600 font-semibold">${product.price}</p>
+                              <p className="text-red-600 font-semibold">Rs{product.price}</p>
                             </div>
                           </div>
                         </div>
