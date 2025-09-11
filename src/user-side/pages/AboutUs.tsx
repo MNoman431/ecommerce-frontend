@@ -1,78 +1,5 @@
-// import React from "react";
-
-// const AboutUs: React.FC = () => {
-//   return (
-//     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
-      
-//       {/* Header */}
-//       <section className="py-16 px-6 text-center">
-//         <h1 className="text-4xl font-extrabold mb-4 text-red-600 dark:text-red-400">
-//           About Fancy Top Covers
-//         </h1>
-//         <p className="text-gray-700 dark:text-gray-300 text-lg max-w-2xl mx-auto">
-//           Premium top covers designed to protect and style your furniture with elegance and comfort.
-//         </p>
-//       </section>
-
-//       {/* Our Story */}
-//       <section className="py-12 px-6 max-w-4xl mx-auto">
-//         <h2 className="text-2xl font-bold mb-4 text-red-600 dark:text-red-400">
-//           Our Story
-//         </h2>
-//         <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-//           Fancy Top Covers started with a vision to provide durable and stylish furniture covers
-//           that elevate homes. Every product is crafted with attention to detail, combining
-//           practicality with design aesthetics.
-//         </p>
-//       </section>
-
-//       {/* Mission */}
-//       <section className="py-12 px-6 max-w-4xl mx-auto">
-//         <h2 className="text-2xl font-bold mb-4 text-red-600 dark:text-red-400">
-//           Our Mission
-//         </h2>
-//         <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-//           Our mission is to provide top-quality, stylish covers that combine durability
-//           with elegance, ensuring a perfect fit for every lifestyle.
-//         </p>
-//       </section>
-
-//       {/* Team */}
-//       {/* <section className="py-12 px-6 max-w-5xl mx-auto">
-//         <h2 className="text-2xl font-bold mb-8 text-red-600 dark:text-red-400 text-center">
-//           Meet the Team
-//         </h2>
-//         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-//           <div className="text-center">
-//             <div className="w-24 h-24 mx-auto rounded-full overflow-hidden mb-2 border-2 border-red-600">
-//               <img src="/team/member1.jpg" alt="Team Member" className="w-full h-full object-cover" />
-//             </div>
-//             <h3 className="font-medium">Muhammad Noman</h3>
-//             <p className="text-gray-600 dark:text-gray-400 text-sm">Founder & CEO</p>
-//           </div>
-//           <div className="text-center">
-//             <div className="w-24 h-24 mx-auto rounded-full overflow-hidden mb-2 border-2 border-red-600">
-//               <img src="/team/member2.jpg" alt="Team Member" className="w-full h-full object-cover" />
-//             </div>
-//             <h3 className="font-medium">Jane Doe</h3>
-//             <p className="text-gray-600 dark:text-gray-400 text-sm">Head of Design</p>
-//           </div>
-//         </div>
-//       </section> */}
-
-//     </div>
-//   );
-// };
-
-// export default AboutUs;
-
-
-
-
-
-
-// 2nd about us
 import React from "react";
+import { Link } from "react-router-dom";
 
 const AboutUs: React.FC = () => {
   return (
@@ -84,7 +11,7 @@ const AboutUs: React.FC = () => {
             About TopCovers
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Premium mobile accessories designed to protect your devices with style and sophistication
+            Premium car top covers designed to protect your vehicles with style and durability
           </p>
         </div>
 
@@ -93,21 +20,19 @@ const AboutUs: React.FC = () => {
           <div>
             <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">Our Story</h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-              TopCovers began with a simple vision: to create mobile accessories that combine exceptional protection with 
-              stunning design. What started as a small passion project has grown into a trusted brand known for quality and 
-              innovation in the mobile accessories market.
+              TopCovers started with a vision to provide car owners with top-quality covers that combine protection and sleek design.
+              From a small idea, we have grown into a trusted brand known for premium car top covers that safeguard your vehicles.
             </p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Every product we create is crafted with meticulous attention to detail, ensuring that your devices are not only 
-              protected but also make a style statement. We believe that your mobile accessories should reflect your personality 
-              while providing the ultimate protection for your valuable devices.
+              Each product is crafted with precision, ensuring your car is protected from weather, dust, and scratches while maintaining style.
+              We believe that car covers should reflect both quality and elegance.
             </p>
           </div>
           <div className="rounded-xl overflow-hidden shadow-2xl">
-            <img 
-              src="https://images.unsplash.com/photo-1616077168079-7e09a677fb2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-              alt="TopCovers products" 
-              className="w-full h-full object-cover"
+            <img
+              src="/about-us-img.png"
+              alt="TopCovers products"
+              className="w-full h-auto max-h-[400px] object-cover"
             />
           </div>
         </div>
@@ -122,7 +47,7 @@ const AboutUs: React.FC = () => {
             </div>
             <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Our Mission</h3>
             <p className="text-gray-600 dark:text-gray-300">
-              To provide premium quality mobile covers that offer superior protection while enhancing the aesthetic appeal of your devices.
+              To provide premium quality car top covers that offer superior protection while enhancing the look of your vehicle.
             </p>
           </div>
 
@@ -134,7 +59,7 @@ const AboutUs: React.FC = () => {
             </div>
             <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Our Vision</h3>
             <p className="text-gray-600 dark:text-gray-300">
-              To become the most trusted brand for mobile accessories, known for innovation, quality, and customer satisfaction.
+              To be the most trusted brand for car top covers, known for innovation, quality, and customer satisfaction.
             </p>
           </div>
 
@@ -146,7 +71,7 @@ const AboutUs: React.FC = () => {
             </div>
             <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Our Values</h3>
             <p className="text-gray-600 dark:text-gray-300">
-              Quality, innovation, customer satisfaction, and sustainability are at the core of everything we do.
+              Quality, innovation, customer satisfaction, and vehicle protection are at the core of everything we do.
             </p>
           </div>
         </div>
@@ -157,9 +82,9 @@ const AboutUs: React.FC = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
               <div className="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 border-4 border-red-100 dark:border-red-900/30">
-                <img 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
-                  alt="Muhammad Noman" 
+                <img
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80"
+                  alt="Muhammad Noman"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -172,9 +97,9 @@ const AboutUs: React.FC = () => {
 
             <div className="text-center bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
               <div className="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 border-4 border-red-100 dark:border-red-900/30">
-                <img 
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
-                  alt="Sarah Johnson" 
+                <img
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80"
+                  alt="Sarah Johnson"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -187,9 +112,9 @@ const AboutUs: React.FC = () => {
 
             <div className="text-center bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
               <div className="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 border-4 border-red-100 dark:border-red-900/30">
-                <img 
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
-                  alt="David Chen" 
+                <img
+                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80"
+                  alt="David Chen"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -202,9 +127,9 @@ const AboutUs: React.FC = () => {
 
             <div className="text-center bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
               <div className="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 border-4 border-red-100 dark:border-red-900/30">
-                <img 
-                  src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
-                  alt="Aisha Khan" 
+                <img
+                  src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80"
+                  alt="Aisha Khan"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -245,9 +170,9 @@ const AboutUs: React.FC = () => {
           <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
             Discover our premium collection of mobile covers and accessories designed to protect your device in style.
           </p>
-          <button className="bg-gradient-to-r from-red-600 to-pink-600 text-white font-semibold py-3 px-8 rounded-full hover:from-red-700 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-xl">
+          <Link to="/user" className="bg-gradient-to-r from-red-600 to-pink-600 text-white font-semibold py-3 px-8 rounded-full hover:from-red-700 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-xl">
             Shop Now
-          </button>
+          </Link>
         </div>
       </div>
     </div>
