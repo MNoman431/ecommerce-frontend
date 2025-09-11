@@ -68,10 +68,10 @@ const Contact: React.FC = () => {
                 <FiMapPin className="w-6 h-6 text-red-600 dark:text-red-400" />
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-gray-100">Office Address</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100">Shop Address</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Main Boulevard, Gulberg III<br />
-                  Lahore, Punjab 54000<br />
+                  17A Mintgomtory Road<br />
+                  Fancy Motors, Lahore<br />
                   Pakistan
                 </p>
               </div>
@@ -161,13 +161,32 @@ const Contact: React.FC = () => {
 
       {/* Map Section */}
       <div className="mt-16">
-        <h2 className="text-2xl font-bold text-red-600 dark:text-red-400 mb-6 text-center">Find Us Here</h2>
-        <div className="bg-gray-200 dark:bg-gray-700 rounded-2xl h-96 flex items-center justify-center">
-          <div className="text-center text-gray-600 dark:text-gray-300">
-            <FiMapPin className="w-12 h-12 mx-auto mb-4 text-red-600 dark:text-red-400" />
-            <p className="text-lg font-semibold">Interactive Map</p>
-            <p className="text-sm">Map integration would be here</p>
-          </div>
+        <h2 className="text-2xl font-bold text-red-600 dark:text-red-400 mb-6 text-center">Find Our Shop</h2>
+        <div className="bg-gray-200 dark:bg-gray-700 rounded-2xl h-96 overflow-hidden">
+          {/* Google Maps Embed with your exact location */}
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d435518.6817852355!2d74.054197184766!3d31.483220874915156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39190483e58107d9%3A0xc23abe6ccc7e2462!2sLahore%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1647260382710!5m2!1sen!2s"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="rounded-2xl"
+          ></iframe>
+        </div>
+        
+        {/* Directions Button */}
+        <div className="text-center mt-6">
+          <a 
+            href="https://www.google.com/maps/dir//17A+Mintgomtory+Road+Fancy+Motors+Lahore" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300"
+          >
+            <FiMapPin className="mr-2" />
+            Get Directions
+          </a>
         </div>
       </div>
 
