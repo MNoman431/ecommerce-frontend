@@ -286,7 +286,7 @@
 
 import React, { useState, useEffect} from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FiSearch, FiUser, FiLogOut, FiMenu, FiX, FiSun, FiMoon, FiPackage } from "react-icons/fi";
+import { FiUser, FiLogOut, FiMenu, FiX, FiSun, FiMoon, FiPackage } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import type { AppDispatch, RootState } from "../../redux/store";
