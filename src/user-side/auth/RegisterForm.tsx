@@ -103,7 +103,7 @@ const RegisterForm: React.FC = () => {
               />
             </div>
 
-            <div>
+            {/* <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Account Type</label>
               <select
                 value={role}
@@ -114,7 +114,7 @@ const RegisterForm: React.FC = () => {
                 <option value="user">Customer</option>
                 <option value="admin">Admin</option>
               </select>
-            </div>
+            </div> */}
 
             <button
               type="submit"
