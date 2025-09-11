@@ -207,19 +207,27 @@ const AllTopCovers: React.FC = () => {
                 </div>
 
                 {/* Price */}
-                {!Number.isNaN(getPrice(product)) && (
-                  <div className="mt-2 flex items-center gap-2">
-                    <p className="text-red-600 font-bold">₹{getPrice(product)}</p>
-                    {!Number.isNaN(getOldPrice(product)) && (
-                      <>
-                        <span className="text-gray-400 dark:text-gray-500 line-through text-sm">₹{getOldPrice(product)}</span>
-                        {getDiscountPercent(product) > 0 && (
-                          <span className="text-green-600 text-xs font-semibold">Save {getDiscountPercent(product)}%</span>
-                        )}
-                      </>
-                    )}
-                  </div>
-                )}
+               {/* Price */}
+{!Number.isNaN(getPrice(product)) && (
+  <div className="mt-2 flex items-center gap-2">
+    <p className="text-red-600 font-bold">
+      Rs {getPrice(product).toLocaleString("en-IN")}
+    </p>
+    {!Number.isNaN(getOldPrice(product)) && (
+      <>
+        <span className="text-gray-400 dark:text-gray-500 line-through text-sm">
+          Rs {getOldPrice(product).toLocaleString("en-IN")}
+        </span>
+        {getDiscountPercent(product) > 0 && (
+          <span className="text-green-600 text-xs font-semibold">
+            Save {getDiscountPercent(product)}%
+          </span>
+        )}
+      </>
+    )}
+  </div>
+)}
+
               </div>
             </div>
           ))}

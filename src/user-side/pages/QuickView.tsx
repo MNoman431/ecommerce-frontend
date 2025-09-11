@@ -159,10 +159,10 @@ const QuickView: React.FC = () => {
           <div className="space-y-2">
             <div className="flex items-center space-x-3">
               {selectedProduct.price != null && (
-                <span className="text-3xl font-bold text-red-600">₹{selectedProduct.price}</span>
+         <span className="text-3xl font-bold text-red-600">Rs {selectedProduct.price}</span>
               )}
               {originalPrice && originalPrice > selectedProduct.price && (
-                <span className="text-lg text-gray-500 line-through">₹{originalPrice}</span>
+                <span className="text-lg text-gray-500 line-through">Rs {originalPrice}</span>
               )}
               {discount > 0 && (
                 <span className="bg-red-100 text-red-800 text-sm font-medium px-2.5 py-0.5 rounded-full">
