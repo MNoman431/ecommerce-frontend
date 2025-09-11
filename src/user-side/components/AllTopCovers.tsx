@@ -84,10 +84,10 @@ const AllTopCovers: React.FC = () => {
   }
 
   if (error) {
-  return (
+    return (
       <div className="max-w-7xl mx-auto px-6 py-12">
         <p className="text-center text-red-600">{String(error)}</p>
-    </div>
+      </div>
     );
   }
 
@@ -117,119 +117,106 @@ const AllTopCovers: React.FC = () => {
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
           {paginatedProducts.map((product: Product) => (
-            <div
-              key={String(product.id ?? Math.random())}
-              className="group bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden ring-1 ring-transparent hover:ring-red-50/50"
-            >
-              <div className="relative aspect-[4/5] bg-gray-50 dark:bg-gray-700 overflow-hidden">
-                {/* Discount Badge */}
-                {getDiscountPercent(product) > 0 && (
-                  <span className="absolute left-3 top-3 z-10 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
-                    -{getDiscountPercent(product)}%
-                  </span>
-                )}
-
-                {/* Action Buttons */}
-                <div className="absolute right-3 top-3 z-10 flex flex-col gap-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                  <button className="p-2 rounded-full bg-white/90 hover:bg-white text-gray-700 hover:text-red-600 shadow-md">
-                    <FiHeart className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      if (product.id != null) {
-                        dispatch(addToCart({ productId: product.id as number, quantity: 1 }))
-                          .then(() => {
-                            dispatch(fetchCart());
-                            toast.success("Added to cart");
-                          })
-                          .catch(() => {
-                            toast.error("Failed to add to cart");
-                          });
-                      }
-                    }}
-                    className="p-2 rounded-full bg-white/90 hover:bg-white text-gray-700 hover:text-red-600 shadow-md"
-                  >
-                    <FiShoppingCart className="w-4 h-4" />
-                  </button>
-                </div>
-
-                {/* Image */}
-                {getImage(product) ? (
-                  <img
-                    src={getImage(product)}
-                    alt={getTitle(product)}
-                    className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div className="h-full w-full flex items-center justify-center text-gray-400">No Image</div>
-                )}
-
-                {/* Quick View */}
-                {/* <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const pid = product.id != null ? String(product.id) : "";
-                    if (pid) navigate(`/user/product/${pid}`);
-                  }}
-                  className="absolute inset-x-3 bottom-3 z-10 hidden sm:flex items-center justify-center gap-2 bg-white/95 text-gray-800 border border-gray-200 rounded-full py-2 text-xs font-medium shadow-md opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
-                >
-                  <FiEye className="w-4 h-4" />
-                  Quick View
-                </button> */}
-                <button
-  onClick={(e) => {
-    e.preventDefault();
-    const pid = product.id != null ? String(product.id) : "";
-    if (pid) navigate(`/user/product/${pid}`);
-  }}
-  className="absolute inset-x-3 bottom-3 z-10 flex items-center justify-center gap-2 
-             bg-white/95 text-gray-800 border border-gray-200 rounded-full py-2 text-xs font-medium shadow-md
-             opacity-100 sm:opacity-0 sm:translate-y-2 sm:group-hover:opacity-100 sm:group-hover:translate-y-0 
-             transition-all duration-300"
+          <div
+  key={String(product.id ?? Math.random())}
+  className="group bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden ring-1 ring-transparent hover:ring-red-50/50"
 >
-  <FiEye className="w-4 h-4" />
-  Quick View
-</button>
+  <div className="relative aspect-[4/5] bg-gray-50 dark:bg-gray-700 overflow-hidden">
+    {/* Discount Badge */}
+    {getDiscountPercent(product) > 0 && (
+      <span className="absolute left-3 top-3 z-10 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+        -{getDiscountPercent(product)}%
+      </span>
+    )}
 
-              </div>
+    {/* Action Buttons */}
+    <div className="absolute right-3 top-3 z-10 flex flex-col gap-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+      <button className="p-2 rounded-full bg-white/90 hover:bg-white text-gray-700 hover:text-red-600 shadow-md">
+        <FiHeart className="w-4 h-4" />
+      </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          if (product.id != null) {
+            dispatch(addToCart({ productId: product.id as number, quantity: 1 }))
+              .then(() => {
+                dispatch(fetchCart());
+                toast.success("Added to cart");
+              })
+              .catch(() => {
+                toast.error("Failed to add to cart");
+              });
+          }
+        }}
+        className="p-2 rounded-full bg-white/90 hover:bg-white text-gray-700 hover:text-red-600 shadow-md"
+      >
+        <FiShoppingCart className="w-4 h-4" />
+      </button>
+    </div>
 
-              <div className="p-4">
-                <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 line-clamp-2 min-h-[2.5rem]">{getTitle(product)}</h3>
+    {/* Image */}
+    {getImage(product) ? (
+      <img
+        src={getImage(product)}
+        alt={getTitle(product)}
+        className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+        loading="lazy"
+      />
+    ) : (
+      <div className="h-full w-full flex items-center justify-center text-gray-400">No Image</div>
+    )}
 
-                {/* Rating */}
-                <div className="mt-2 flex items-center gap-1 text-amber-400">
-                  {Array.from({ length: 5 }).map((_, idx) => (
-                    <FiStar key={idx} className={`w-4 h-4 ${idx < 4 ? "fill-amber-400" : ""}`} />
-                  ))}
-                  <span className="ml-2 text-xs text-gray-500 dark:text-gray-400">(123)</span>
-                </div>
+    {/* Quick View */}
+    <button
+      onClick={(e) => {
+        e.preventDefault();
+        const pid = product.id != null ? String(product.id) : "";
+        if (pid) navigate(`/user/product/${pid}`);
+      }}
+      className="absolute inset-x-3 bottom-3 z-10 flex items-center justify-center gap-2 
+                 bg-white/95 text-gray-800 border border-gray-200 rounded-full py-2 text-xs font-medium shadow-md
+                 opacity-100 sm:opacity-0 sm:translate-y-2 sm:group-hover:opacity-100 sm:group-hover:translate-y-0 
+                 transition-all duration-300"
+    >
+      <FiEye className="w-4 h-4" />
+      Quick View
+    </button>
+  </div>
 
-                {/* Price */}
-               {/* Price */}
-{!Number.isNaN(getPrice(product)) && (
-  <div className="mt-2 flex items-center gap-2">
-    <p className="text-red-600 font-bold">
-      Rs {getPrice(product).toLocaleString("en-IN")}
-    </p>
-    {!Number.isNaN(getOldPrice(product)) && (
-      <>
-        <span className="text-gray-400 dark:text-gray-500 line-through text-sm">
-          Rs {getOldPrice(product).toLocaleString("en-IN")}
-        </span>
-        {getDiscountPercent(product) > 0 && (
-          <span className="text-green-600 text-xs font-semibold">
-            Save {getDiscountPercent(product)}%
-          </span>
+  <div className="p-4 flex flex-col justify-between h-[160px] sm:h-[180px]">
+    <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 line-clamp-2 min-h-[2.5rem]">{getTitle(product)}</h3>
+
+    {/* Rating */}
+    <div className="mt-1 flex items-center gap-1 text-amber-400">
+      {Array.from({ length: 5 }).map((_, idx) => (
+        <FiStar key={idx} className={`w-4 h-4 ${idx < 4 ? "fill-amber-400" : ""}`} />
+      ))}
+      <span className="ml-2 text-xs text-gray-500 dark:text-gray-400">(123)</span>
+    </div>
+
+    {/* Price Section */}
+    {!Number.isNaN(getPrice(product)) && (
+      <div className="mt-2 flex flex-col sm:flex-row sm:items-center sm:gap-2 gap-1">
+        <p className="text-red-600 font-bold text-base sm:text-sm">
+          Rs {getPrice(product).toLocaleString("en-IN")}
+        </p>
+        {!Number.isNaN(getOldPrice(product)) && (
+          <div className="flex items-center gap-1">
+            <span className="text-gray-400 dark:text-gray-500 line-through text-xs">
+              Rs {getOldPrice(product).toLocaleString("en-IN")}
+            </span>
+            {getDiscountPercent(product) > 0 && (
+              <span className="text-green-600 text-xs font-semibold">
+                Save {getDiscountPercent(product)}%
+              </span>
+            )}
+          </div>
         )}
-      </>
+      </div>
     )}
   </div>
-)}
+</div>
 
-              </div>
-            </div>
           ))}
         </div>
       )}
@@ -240,11 +227,10 @@ const AllTopCovers: React.FC = () => {
           <button
             onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
             disabled={pageSafe === 1}
-            className={`px-3 py-2 rounded-md border text-sm font-medium ${
-              pageSafe === 1
-                ? "text-gray-300 border-gray-200 dark:border-gray-700 cursor-not-allowed"
-                : "text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
-            }`}
+            className={`px-3 py-2 rounded-md border text-sm font-medium ${pageSafe === 1
+              ? "text-gray-300 border-gray-200 dark:border-gray-700 cursor-not-allowed"
+              : "text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
+              }`}
           >
             Prev
           </button>
@@ -256,11 +242,10 @@ const AllTopCovers: React.FC = () => {
               <button
                 key={pageNum}
                 onClick={() => setCurrentPage(pageNum)}
-                className={`min-w-[2.25rem] px-3 py-2 rounded-md border text-sm font-medium ${
-                  isActive
-                    ? "bg-red-600 border-red-600 text-white"
-                    : "text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
-                }`}
+                className={`min-w-[2.25rem] px-3 py-2 rounded-md border text-sm font-medium ${isActive
+                  ? "bg-red-600 border-red-600 text-white"
+                  : "text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
+                  }`}
               >
                 {pageNum}
               </button>
@@ -270,11 +255,10 @@ const AllTopCovers: React.FC = () => {
           <button
             onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
             disabled={pageSafe === totalPages}
-            className={`px-3 py-2 rounded-md border text-sm font-medium ${
-              pageSafe === totalPages
-                ? "text-gray-300 border-gray-200 dark:border-gray-700 cursor-not-allowed"
-                : "text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
-            }`}
+            className={`px-3 py-2 rounded-md border text-sm font-medium ${pageSafe === totalPages
+              ? "text-gray-300 border-gray-200 dark:border-gray-700 cursor-not-allowed"
+              : "text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
+              }`}
           >
             Next
           </button>

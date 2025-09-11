@@ -83,6 +83,8 @@
 
 
 
+
+
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { LayoutDashboard, Package, PlusCircle, LogOut, ClipboardList } from "lucide-react";
@@ -157,6 +159,8 @@ const Slider: React.FC = () => {
     Logout
   </button>
 </div>
+
+{/*  */}
 
 
       {/* Footer */}
