@@ -516,7 +516,7 @@ const Navbar: React.FC = () => {
             )}
             <div className="relative">
               <button onClick={() => { navigate('/cart'); setIsOpen(false); }} className="p-2 text-gray-600 hover:text-red-600 rounded-lg transition">
-                <FiShoppingBag className="w-5 h-5" />
+             <ShoppingCart className="w-5 h-5" />
                 {cartCount > 0 && (
                   <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs min-w-[1.1rem] h-5 px-1 rounded-full flex items-center justify-center font-bold">
                     {Math.min(cartCount, 99)}
