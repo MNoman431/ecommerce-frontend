@@ -52,17 +52,34 @@ export const fetchOrders = createAsyncThunk(
 );
 
 // ✅ Send fields directly to backend
+// export const placeOrderWithShipping = createAsyncThunk(
+//   "orders/placeOrderWithShipping",
+//   async (shipping: { 
+//     fullName: string; 
+//     phone: string; 
+//     deliveryAddress: string; 
+//     city: string; 
+//     postalCode: string; 
+//     paymentMethod: string;
+//   }) => {
+//     const res = await api.post("/orders/", shipping); // 👈 changed
+//     return res.data; // { message, orderId }
+//   }
+// );
+
 export const placeOrderWithShipping = createAsyncThunk(
   "orders/placeOrderWithShipping",
   async (shipping: { 
     fullName: string; 
-    phone: string; 
-    deliveryAddress: string; 
+    phoneNumber: string;   // 👈 match backend
+    email: string;         // 👈 required
+    address: string;       // 👈 match backend
     city: string; 
     postalCode: string; 
-    paymentMethod: string;
+    country: string;       // 👈 required
+    paymentMethod: string; // 👈 COD | Bank Transfer | Card
   }) => {
-    const res = await api.post("/orders/", shipping); // 👈 changed
-    return res.data; // { message, orderId }
+    const res = await api.post("/orders/", shipping);
+    return res.data;
   }
 );
