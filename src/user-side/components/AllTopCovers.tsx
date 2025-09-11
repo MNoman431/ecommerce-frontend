@@ -167,7 +167,7 @@ const AllTopCovers: React.FC = () => {
                 )}
 
                 {/* Quick View */}
-                <button
+                {/* <button
                   onClick={(e) => {
                     e.preventDefault();
                     const pid = product.id != null ? String(product.id) : "";
@@ -177,7 +177,22 @@ const AllTopCovers: React.FC = () => {
                 >
                   <FiEye className="w-4 h-4" />
                   Quick View
-                </button>
+                </button> */}
+                <button
+  onClick={(e) => {
+    e.preventDefault();
+    const pid = product.id != null ? String(product.id) : "";
+    if (pid) navigate(`/user/product/${pid}`);
+  }}
+  className="absolute inset-x-3 bottom-3 z-10 flex items-center justify-center gap-2 
+             bg-white/95 text-gray-800 border border-gray-200 rounded-full py-2 text-xs font-medium shadow-md
+             opacity-100 sm:opacity-0 sm:translate-y-2 sm:group-hover:opacity-100 sm:group-hover:translate-y-0 
+             transition-all duration-300"
+>
+  <FiEye className="w-4 h-4" />
+  Quick View
+</button>
+
               </div>
 
               <div className="p-4">
