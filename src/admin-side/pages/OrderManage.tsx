@@ -71,7 +71,7 @@ const OrderManage: React.FC = () => {
           <div class="row"><span class="label">Payment</span><span class="value">${paymentMethod}</span></div>
           <div class="line"></div>
           <div class="row"><span class="label">Total Items</span><span class="value">${totalItems}</span></div>
-          <div class="row"><span class="label">Total Amount</span><span class="value">₹${o.totalAmount}</span></div>
+          <div class="row"><span class="label">Total Amount</span><span class="value">${o.totalAmount}</span></div>
         </div>
       </body>
     </html>
@@ -126,7 +126,7 @@ const OrderManage: React.FC = () => {
                       <td className="px-4 py-3 text-sm">{o.id}</td>
                       <td className="px-4 py-3 text-sm">{o.User?.name || o.user?.name || o.userId}</td>
                       <td className="px-4 py-3 text-sm">{o.User?.email || o.user?.email || "-"}</td>
-                      <td className="px-4 py-3 text-sm font-medium">₹{o.totalAmount}</td>
+                      <td className="px-4 py-3 text-sm font-medium">Rs{o.totalAmount}</td>
                       <td className="px-4 py-3 text-sm">
                         <div className="inline-flex items-center gap-2">
                           <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-blue-50 text-blue-700">{o.status}</span>
@@ -203,7 +203,7 @@ const OrderManage: React.FC = () => {
               <div className="space-y-1 text-sm">
                 <p><span className="font-medium text-gray-600">Order #:</span> {selected.id}</p>
                 <p><span className="font-medium text-gray-600">Status:</span> {selected.status}</p>
-                <p><span className="font-medium text-gray-600">Total:</span> ₹{selected.totalAmount}</p>
+                <p><span className="font-medium text-gray-600">Total:</span> Rs{selected.totalAmount}</p>
               </div>
               <div className="space-y-1 text-sm">
                 <p><span className="font-medium text-gray-600">User:</span> {selected.User?.name || selected.user?.name || selected.userId}</p>
@@ -226,7 +226,7 @@ const OrderManage: React.FC = () => {
               </div>
               <div className="rounded border p-3">
                 <div className="text-xs text-gray-500">Total Amount</div>
-                <div className="text-sm font-medium">₹{selected.totalAmount}</div>
+                <div className="text-sm font-medium">Rs{selected.totalAmount}</div>
               </div>
             </div>
             {/* Shipping info */}
