@@ -493,64 +493,79 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Mobile Bottom Section */}
-        <div className="border-t border-gray-100 p-4 flex flex-col gap-3">
-          <div className="flex gap-3">
-            <button className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition">
-              <FiSearch className="w-5 h-5" />
-            </button>
-            <button
-              onClick={toggleTheme}
-              className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
-            >
-              {theme === 'dark' ? <FiSun className="w-5 h-5" /> : <FiMoon className="w-5 h-5" />}
-            </button>
-            {user && (
-              <>
-                <button onClick={() => { navigate('/user/profile'); setIsOpen(false); }} className="p-2 text-gray-600 hover:text-red-600 rounded-lg transition">
-                  <FiUser className="w-5 h-5" />
-                </button>
-                <button onClick={() => { navigate('/user/orders'); setIsOpen(false); }} className="p-2 text-gray-600 hover:text-red-600 rounded-lg transition">
-                  <FiPackage className="w-5 h-5" />
-                </button>
-              </>
-            )}
-            <div className="relative">
-              <button onClick={() => { navigate('/cart'); setIsOpen(false); }} className="p-2 text-gray-600 hover:text-red-600 rounded-lg transition">
-             <ShoppingCart className="w-5 h-5" />
-                {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs min-w-[1.1rem] h-5 px-1 rounded-full flex items-center justify-center font-bold">
-                    {Math.min(cartCount, 99)}
-                  </span>
-                )}
-              </button>
-            </div>
-          </div>
+       {/* Mobile Bottom Section */}
+<div className="border-t border-gray-100 p-4 flex flex-col gap-3">
+  {/* Mobile SearchBar */}
+  <div className="w-full">
+    <SearchBar />
+  </div>
 
-          {user ? (
-            <button
-              onClick={handleLogout}
-              className="flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-pink-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-red-700 hover:to-pink-700 transition shadow-lg"
-            >
-              <FiLogOut className="w-4 h-4" />
-              Logout
-            </button>
-          ) : (
-            <div className="flex gap-2">
-              <button
-                onClick={() => { navigate('/login'); setIsOpen(false); }}
-                className="flex-1 text-center text-gray-700 hover:text-red-600 font-medium transition px-3 py-2"
-              >
-                Login
-              </button>
-              <button
-                onClick={() => { navigate('/register'); setIsOpen(false); }}
-                className="flex-1 bg-gradient-to-r from-red-600 to-pink-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-red-700 hover:to-pink-700 transition shadow-lg"
-              >
-                Register
-              </button>
-            </div>
-          )}
-        </div>
+  <div className="flex gap-3 items-center">
+    <button
+      onClick={toggleTheme}
+      className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
+    >
+      {theme === 'dark' ? <FiSun className="w-5 h-5" /> : <FiMoon className="w-5 h-5" />}
+    </button>
+
+    {user && (
+      <>
+        <button
+          onClick={() => { navigate('/user/profile'); setIsOpen(false); }}
+          className="p-2 text-gray-600 hover:text-red-600 rounded-lg transition"
+        >
+          <FiUser className="w-5 h-5" />
+        </button>
+        <button
+          onClick={() => { navigate('/user/orders'); setIsOpen(false); }}
+          className="p-2 text-gray-600 hover:text-red-600 rounded-lg transition"
+        >
+          <FiPackage className="w-5 h-5" />
+        </button>
+      </>
+    )}
+
+    <div className="relative">
+      <button
+        onClick={() => { navigate('/cart'); setIsOpen(false); }}
+        className="p-2 text-gray-600 hover:text-red-600 rounded-lg transition"
+      >
+        <ShoppingCart className="w-5 h-5" />
+        {cartCount > 0 && (
+          <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs min-w-[1.1rem] h-5 px-1 rounded-full flex items-center justify-center font-bold">
+            {Math.min(cartCount, 99)}
+          </span>
+        )}
+      </button>
+    </div>
+  </div>
+
+  {user ? (
+    <button
+      onClick={handleLogout}
+      className="flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-pink-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-red-700 hover:to-pink-700 transition shadow-lg"
+    >
+      <FiLogOut className="w-4 h-4" />
+      Logout
+    </button>
+  ) : (
+    <div className="flex gap-2">
+      <button
+        onClick={() => { navigate('/login'); setIsOpen(false); }}
+        className="flex-1 text-center text-gray-700 hover:text-red-600 font-medium transition px-3 py-2"
+      >
+        Login
+      </button>
+      <button
+        onClick={() => { navigate('/register'); setIsOpen(false); }}
+        className="flex-1 bg-gradient-to-r from-red-600 to-pink-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-red-700 hover:to-pink-700 transition shadow-lg"
+      >
+        Register
+      </button>
+    </div>
+  )}
+</div>
+
       </div>
     </div>
   </div>
