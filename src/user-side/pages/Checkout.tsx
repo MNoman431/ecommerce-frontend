@@ -44,176 +44,176 @@ const Checkout: React.FC = () => {
     return { subtotal };
   }, [items]);
 
-const proceedToPay = async () => {
-  if (
-    !fullName ||
-    !email ||
-    !phoneNumber ||
-    !address ||
-    !city ||
-    !postalCode ||
-    !country ||
-    !paymentMethod
-  ) {
-    toast.error("Please fill all required details");
-    return;
-  }
-
-  const amountInPaise = totals.subtotal * 100;
-
-  try {
-    setPayLoading(true);
-
-    const shippingInfo = {
-      fullName,
-      email,             // ✅ email included correctly
-     phoneNumber,   // ✅ correct key
-  address,       // ✅ correct key
-      city,
-      postalCode,
-      country,
-      paymentMethod,
-      items: items.map((it: any) => ({
-        productId: it.productId || it.Product?.id,
-        name: it.Product?.name || "",
-        quantity: it.quantity,
-        price: it.Product?.price ?? it.price,
-      })),
-    };
-
-    if (paymentMethod === "Card") {
-      // 1️⃣ Create Stripe Payment Intent
-      const resultAction = await dispatch(
-        createPaymentIntent({
-          amount: amountInPaise,
-          currency: "pkr",
-          productName: "Order Payment",
-          shippingInfo,
-        })
-      );
-
-      if (!createPaymentIntent.fulfilled.match(resultAction)) {
-        toast.error(resultAction.payload as string || "Payment failed");
-        return;
-      }
-
-      const url = resultAction.payload.url;
-      if (!url) {
-        toast.error("Failed to initiate payment");
-        return;
-      }
-
-      // 2️⃣ Place order BEFORE redirecting to Stripe
-      await dispatch(placeOrderWithShipping(shippingInfo)).unwrap();
-
-      // 3️⃣ Redirect to Stripe Checkout
-      window.location.href = url;
-    } else {
-      // COD / Bank Transfer
-      await dispatch(placeOrderWithShipping(shippingInfo)).unwrap();
-      toast.success("Order placed successfully");
-      navigate("/user/thank-you", { replace: true, state: { name: fullName } });
+  const proceedToPay = async () => {
+    if (
+      !fullName ||
+      !email ||
+      !phoneNumber ||
+      !address ||
+      !city ||
+      !postalCode ||
+      !country ||
+      !paymentMethod
+    ) {
+      toast.error("Please fill all required details");
+      return;
     }
 
-  } catch (e: any) {
-    toast.error(e?.message || "Failed to place order");
-  } finally {
-    setPayLoading(false);
-  }
-};
+    const amountInPaise = totals.subtotal * 100;
+
+    try {
+      setPayLoading(true);
+
+      const shippingInfo = {
+        fullName,
+        email,             // ✅ email included correctly
+        phoneNumber,   // ✅ correct key
+        address,       // ✅ correct key
+        city,
+        postalCode,
+        country,
+        paymentMethod,
+        items: items.map((it: any) => ({
+          productId: it.productId || it.Product?.id,
+          name: it.Product?.name || "",
+          quantity: it.quantity,
+          price: it.Product?.price ?? it.price,
+        })),
+      };
+
+      if (paymentMethod === "Card") {
+        // 1️⃣ Create Stripe Payment Intent
+        const resultAction = await dispatch(
+          createPaymentIntent({
+            amount: amountInPaise,
+            currency: "pkr",
+            productName: "Order Payment",
+            shippingInfo,
+          })
+        );
+
+        if (!createPaymentIntent.fulfilled.match(resultAction)) {
+          toast.error(resultAction.payload as string || "Payment failed");
+          return;
+        }
+
+        const url = resultAction.payload.url;
+        if (!url) {
+          toast.error("Failed to initiate payment");
+          return;
+        }
+
+        // 2️⃣ Place order BEFORE redirecting to Stripe
+        await dispatch(placeOrderWithShipping(shippingInfo)).unwrap();
+
+        // 3️⃣ Redirect to Stripe Checkout
+        window.location.href = url;
+      } else {
+        // COD / Bank Transfer
+        await dispatch(placeOrderWithShipping(shippingInfo)).unwrap();
+        toast.success("Order placed successfully");
+        navigate("/user/thank-you", { replace: true, state: { name: fullName } });
+      }
+
+    } catch (e: any) {
+      toast.error(e?.message || "Failed to place order");
+    } finally {
+      setPayLoading(false);
+    }
+  };
 
 
-// Checkout.tsx
+  // Checkout.tsx
 
-// const proceedToPay = async () => {
-//   if (
-//     !fullName ||
-//     !email ||
-//     !phoneNumber ||
-//     !address ||
-//     !city ||
-//     !postalCode ||
-//     !country ||
-//     !paymentMethod
-//   ) {
-//     toast.error("Please fill all required details");
-//     return;
-//   }
+  // const proceedToPay = async () => {
+  //   if (
+  //     !fullName ||
+  //     !email ||
+  //     !phoneNumber ||
+  //     !address ||
+  //     !city ||
+  //     !postalCode ||
+  //     !country ||
+  //     !paymentMethod
+  //   ) {
+  //     toast.error("Please fill all required details");
+  //     return;
+  //   }
 
-//   const amountInPaise = totals.subtotal * 100;
+  //   const amountInPaise = totals.subtotal * 100;
 
-//   try {
-//     if (paymentMethod === "Card") {
-//       setPayLoading(true);
+  //   try {
+  //     if (paymentMethod === "Card") {
+  //       setPayLoading(true);
 
-//       // ✅ Shipping Info
-//       const shippingInfo = {
-//         fullName,
-//         email,
-//         phoneNumber,
-//         address,
-//         city,
-//         postalCode,
-//         country,
-//         items: items.map((it: any) => ({
-//           productId: it.productId || it.Product?.id,
-//           name: it.Product?.name || "",
-//           quantity: it.quantity,
-//           price: it.Product?.price ?? it.price,
-//         })),
-//       };
+  //       // ✅ Shipping Info
+  //       const shippingInfo = {
+  //         fullName,
+  //         email,
+  //         phoneNumber,
+  //         address,
+  //         city,
+  //         postalCode,
+  //         country,
+  //         items: items.map((it: any) => ({
+  //           productId: it.productId || it.Product?.id,
+  //           name: it.Product?.name || "",
+  //           quantity: it.quantity,
+  //           price: it.Product?.price ?? it.price,
+  //         })),
+  //       };
 
-//       // ✅ 1. Call backend to create Stripe Checkout Session
-//       const resultAction = await dispatch(
-//         createPaymentIntent({
-//           amount: amountInPaise,
-//           currency: "pkr",
-//           productName: "Order Payment",
-//           // userId: /* get current user id from auth state */
-//           shippingInfo,
-//           cartItems: shippingInfo.items,
-//         })
-//       );
+  //       // ✅ 1. Call backend to create Stripe Checkout Session
+  //       const resultAction = await dispatch(
+  //         createPaymentIntent({
+  //           amount: amountInPaise,
+  //           currency: "pkr",
+  //           productName: "Order Payment",
+  //           // userId: /* get current user id from auth state */
+  //           shippingInfo,
+  //           cartItems: shippingInfo.items,
+  //         })
+  //       );
 
-//       if (!createPaymentIntent.fulfilled.match(resultAction)) {
-//         toast.error(
-//           (resultAction.payload as string) || "Payment initiation failed"
-//         );
-//         return;
-//       }
+  //       if (!createPaymentIntent.fulfilled.match(resultAction)) {
+  //         toast.error(
+  //           (resultAction.payload as string) || "Payment initiation failed"
+  //         );
+  //         return;
+  //       }
 
-//       const url = resultAction.payload.url;
-//       if (!url) {
-//         toast.error("Payment URL missing");
-//         return;
-//       }
+  //       const url = resultAction.payload.url;
+  //       if (!url) {
+  //         toast.error("Payment URL missing");
+  //         return;
+  //       }
 
-//       // ✅ 2. Redirect user to Stripe Checkout
-//       window.location.href = url;
-//     } else {
-//       // ✅ COD / Bank Transfer → order create immediately
-//       await dispatch(
-//         placeOrderWithShipping({
-//           fullName,
-//           email,
-//           phoneNumber,
-//           address,
-//           city,
-//           postalCode,
-//           country,
-//           paymentMethod,
-//         })
-//       ).unwrap();
+  //       // ✅ 2. Redirect user to Stripe Checkout
+  //       window.location.href = url;
+  //     } else {
+  //       // ✅ COD / Bank Transfer → order create immediately
+  //       await dispatch(
+  //         placeOrderWithShipping({
+  //           fullName,
+  //           email,
+  //           phoneNumber,
+  //           address,
+  //           city,
+  //           postalCode,
+  //           country,
+  //           paymentMethod,
+  //         })
+  //       ).unwrap();
 
-//       toast.success("Order placed successfully");
-//       navigate("/user/thank-you", { replace: true, state: { name: fullName } });
-//     }
-//   } catch (e: any) {
-//     toast.error(e?.message || "Failed to process payment");
-//   } finally {
-//     setPayLoading(false);
-//   }
-// };
+  //       toast.success("Order placed successfully");
+  //       navigate("/user/thank-you", { replace: true, state: { name: fullName } });
+  //     }
+  //   } catch (e: any) {
+  //     toast.error(e?.message || "Failed to process payment");
+  //   } finally {
+  //     setPayLoading(false);
+  //   }
+  // };
   if (loading)
     return (
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">Loading...</div>
@@ -333,11 +333,10 @@ const proceedToPay = async () => {
         <button
           onClick={proceedToPay}
           disabled={items.length === 0 || payLoading}
-          className={`mt-4 w-full px-4 py-2 rounded-md text-white ${
-            items.length === 0 || payLoading
+          className={`mt-4 w-full px-4 py-2 rounded-md text-white ${items.length === 0 || payLoading
               ? "bg-gray-300 cursor-not-allowed"
               : "bg-green-600 hover:bg-green-700"
-          }`}
+            }`}
         >
           {payLoading ? "Processing..." : "Proceed to Pay"}
         </button>
