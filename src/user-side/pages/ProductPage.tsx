@@ -44,7 +44,7 @@ const ProductPage: React.FC = () => {
         />
         <div className="flex-1">
           <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-          <p className="text-red-600 text-2xl font-semibold mb-4">${product.price}</p>
+          <p className="text-red-600 text-2xl font-semibold mb-4">Rs{product.price}</p>
           <p className="text-gray-700">{product.description}</p>
         </div>
       </div>
