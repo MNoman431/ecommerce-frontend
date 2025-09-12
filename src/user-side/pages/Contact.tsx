@@ -204,10 +204,11 @@ import type { AppDispatch, RootState } from "../../redux/store";
 import { sendContactMessage } from "../../redux/user/contactThunks/ContactThunk";
 import { resetContactState } from "../../redux/user/contactSlice/ContactSlice";
 
-
 const Contact = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { loading, success, error } = useSelector((state: RootState) => state.contact);
+  const { loading, success, error } = useSelector(
+    (state: RootState) => state.contact
+  );
 
   const [formData, setFormData] = useState({
     name: "",
@@ -234,16 +235,20 @@ const Contact = () => {
   }, [success, dispatch]);
 
   return (
-    <div className="p-6 max-w-md mx-auto bg-white shadow rounded">
-      <h2 className="text-xl font-bold mb-4">Contact Us</h2>
-      <form onSubmit={handleSubmit} className="space-y-3">
+    <div className="p-8 max-w-lg mx-auto bg-gradient-to-br from-white to-gray-100 shadow-lg rounded-xl mt-10">
+      <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Contact Us</h2>
+      <p className="text-gray-600 mb-6 text-center">
+        Have questions? We'd love to hear from you. Fill out the form below!
+      </p>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
           name="name"
           placeholder="Your Name"
           value={formData.name}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
           required
         />
         <input
@@ -252,35 +257,36 @@ const Contact = () => {
           placeholder="Your Email"
           value={formData.email}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
           required
         />
         <input
           type="text"
           name="subject"
-          placeholder="Subject"
+          placeholder="Subject (Optional)"
           value={formData.subject}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
         />
         <textarea
           name="message"
           placeholder="Your Message"
           value={formData.message}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-full p-3 border border-gray-300 rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
           required
         />
+
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-md transition duration-200"
           disabled={loading}
         >
-          {loading ? "Sending..." : "Send"}
+          {loading ? "Sending..." : "Send Message"}
         </button>
       </form>
 
-      {error && <p className="mt-3 text-red-600">{error}</p>}
+      {error && <p className="mt-4 text-red-600 font-medium text-center">{error}</p>}
     </div>
   );
 };
