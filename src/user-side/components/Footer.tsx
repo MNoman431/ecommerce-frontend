@@ -23,6 +23,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   to="/user/aboutUs"
+                  onClick={() => window.scrollTo(0, 0)} // 👈 scroll to top
                   className="text-gray-400 hover:text-red-500 transition-colors duration-300"
                 >
                   About Us
@@ -39,6 +40,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   to="/user/contact"
+                  onClick={() => window.scrollTo(0, 0)} // 👈 scroll to top
                   className="text-gray-400 hover:text-red-500 transition-colors duration-300"
                 >
                   Contact Us
