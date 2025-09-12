@@ -39,7 +39,7 @@ const adminContactSlice = createSlice({
     });
 
     // Reply to contact
-    builder.addCase(replyToContact.fulfilled, (state, action) => {
+    builder.addCase(replyToContact.fulfilled, (state) => {
       state.replyStatus = "Reply sent successfully!";
     });
     builder.addCase(replyToContact.rejected, (state, action) => {
