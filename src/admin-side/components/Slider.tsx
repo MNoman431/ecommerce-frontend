@@ -105,6 +105,7 @@ const Slider: React.FC = () => {
     { path: "/products", label: "All Products", icon: <Package size={20} /> },
     { path: "/add-product", label: "Add Product", icon: <PlusCircle size={20} /> },
     { path: "/order-management", label: "Order Management", icon: <ClipboardList size={20} /> },
+    { path: "/user-message", label: "User Messages", icon: <ClipboardList size={20} /> },
 
   ];
 

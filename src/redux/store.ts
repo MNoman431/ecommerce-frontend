@@ -8,6 +8,8 @@ import adminOrdersReducer from './admin/orderSlice/OrderSlice'
 import productsReducer from './admin/productSlices/productSlice'
 import paymentReducer from './user/paymentSlice/PaymentSlice'
 import searchReducer from './user/searchSlice/SearchSlice'
+import contactReducer from './user/contactSlice/ContactSlice'
+import adminContactReducer from './admin/contactSlice/ContactSlice' // admin side
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +20,8 @@ export const store = configureStore({
     products: productsReducer,
     payment: paymentReducer,
     search: searchReducer,
+    contact: contactReducer,
+    adminContacts: adminContactReducer // admin side
   },
 })
 
