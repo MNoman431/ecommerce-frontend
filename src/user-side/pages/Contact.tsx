@@ -197,15 +197,13 @@
 // export default Contact;
 
 
-import type { RootState } from "@reduxjs/toolkit/query";
+// import type { RootState } from "@reduxjs/toolkit/query";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch } from "../../redux/store";
+import type { AppDispatch, RootState } from "../../redux/store";
 import { sendContactMessage } from "../../redux/user/contactThunks/ContactThunk";
 import { resetContactState } from "../../redux/user/contactSlice/ContactSlice";
-// import { AppDispatch, RootState } from "../redux/Store";
-// import { sendContactMessage } from "../redux/contact/ContactThunk";
-// import { resetContactState } from "../redux/contact/ContactSlice";
+
 
 const Contact = () => {
   const dispatch = useDispatch<AppDispatch>();
