@@ -169,7 +169,7 @@ const Dashboard: React.FC = () => {
                 outerRadius={80}
                 label
               >
-                {chartData.map((entry, index) => (
+                {chartData.map((index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
