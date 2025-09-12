@@ -97,8 +97,8 @@ const Dashboard: React.FC = () => {
   }, [dispatch]);
 
   const chartData = [
-    { name: "Products", value: totalProducts || 0 },
-    { name: "Orders", value: totalOrders || 0 },
+    { name: "Products", value: Number(totalProducts) || 0 },
+    { name: "Orders", value: Number(totalOrders) || 0 },
   ];
 
   const COLORS = ["#1D4ED8", "#059669"];
@@ -145,9 +145,7 @@ const Dashboard: React.FC = () => {
             <BarChart data={chartData}>
               <XAxis dataKey="name" stroke="#4B5563" />
               <YAxis stroke="#4B5563" />
-              <Tooltip
-                contentStyle={{ backgroundColor: "#F9FAFB", borderRadius: "10px", border: "none" }}
-              />
+              <Tooltip contentStyle={{ backgroundColor: "#F9FAFB", borderRadius: "10px", border: "none" }} />
               <Bar dataKey="value" fill="#1D4ED8" radius={[8, 8, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
@@ -160,16 +158,8 @@ const Dashboard: React.FC = () => {
           </h2>
           <ResponsiveContainer width="100%" height={250}>
             <PieChart>
-              <Pie
-                data={chartData}
-                dataKey="value"
-                nameKey="name"
-                cx="50%"
-                cy="50%"
-                outerRadius={80}
-                label
-              >
-                {chartData.map((index) => (
+              <Pie data={chartData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
+                {chartData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
